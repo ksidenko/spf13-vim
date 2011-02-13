@@ -68,9 +68,9 @@
 " }
 
 " Vim UI {
-	color molokai     	       		" load a colorscheme
-	set tabpagemax=15 				" only show 15 tabs
-	set showmode                   	" display the current mode
+	color blackboard				" load a colorscheme
+	set tabpagemax=15				" only show 15 tabs
+	set showmode					" display the current mode
 
 	set cursorline  				" highlight current line
 	hi cursorline guibg=#333333 	" highlight bg color of current line
@@ -116,43 +116,32 @@
 " }
 
 " Formatting {
-	set nowrap                     	" wrap long lines
-	set autoindent                 	" indent at the same level of the previous line
-	set shiftwidth=4               	" use indents of 4 spaces
-	set noexpandtab 	       		" tabs are tabs, not spaces
-	set tabstop=4 					" an indentation every four columns
-	"set matchpairs+=<:>            	" match, to be used with % 
-	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
-	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-	" Remove trailing whitespaces and ^M chars
-	autocmd FileType c,cpp,java,php,js,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+	" set nowrap					" wrap long lines
+	set autoindent					" indent at the same level of the previous line
+	set shiftwidth=4				" use indents of 4 spaces
+	set expandtab					" tabs are spaces
+	set tabstop=4					" an indentation every four columns
+	set softtabstop=4				" a soft indentation every four columns
+	"set matchpairs+=<:>				" match, to be used with % 
+	"set pastetoggle=<F12>				" pastetoggle (sane indentation on pastes)
+	"set comments=sl:/*,mb:*,elx:*/  		" auto format comment blocks
 " }
 
-" Key (re)Mappings {
+" Python helpers {
+	highlight BadWhitespace ctermbg=red guibg=red
+	" Display tabs at the beginning of a line in Python mode as bad.
+	au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+	au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+	let python_highlight_all=1
+" }
 
-	"The default leader is '\', but many people prefer ',' as it's in a standard
-	"location
-	let mapleader = ','
+" Key Mappings {
 
 	" Easier moving in tabs and windows
-	map <C-J> <C-W>j<C-W>_
-	map <C-K> <C-W>k<C-W>_
-	map <C-L> <C-W>l<C-W>_
-	map <C-H> <C-W>h<C-W>_
-	map <C-K> <C-W>k<C-W>_
-	
-	" The following two lines conflict with moving to top and bottom of the
-	" screen
-	" If you prefer that functionality, comment them out.
-	map <S-H> gT          
-	map <S-L> gt
-
-	" Stupid shift key fixes
-	cmap W w 						
-	cmap WQ wq
-	cmap wQ wq
-	cmap Q q
-	cmap Tabe tabe
+	map <C-J> :2 tabn
+	map <C-K> :2 tabp
+	map <C-L> :tabn
+	map <C-H> :tabp 
 
 	" Yank from the cursor to the end of the line, to be consistent with C and D.
 	nnoremap Y y$
@@ -171,8 +160,7 @@
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
-	cmap cd. lcd %:p:h
+	nmap cd. :lcd %:p:h<CR>:pwd<CR>
 
 	" visual shifting (does not exit Visual mode)
 	vnoremap < <gv
@@ -197,12 +185,11 @@
 	" } 
 	
 	" PIV {
-		let g:DisableAutoPHPFolding = 0
-		"let cfu=phpcomplete#CompletePHP
+		let g:DisableAutoPHPFolding = 1
 	" }
 	
 	" Supertab {
-		let g:SuperTabDefaultCompletionType = "context"
+		"let g:SuperTabDefaultCompletionType = "context"
 		let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 	" }
 
@@ -224,7 +211,7 @@
 	" ShowMarks {
 		let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		" Don't leave on by default, use :ShowMarksOn to enable
-		let g:showmarks_enable = 0
+		let g:showmarks_enable = 1
 		" For marks a-z
 		highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
 		" For marks A-Z
@@ -235,10 +222,6 @@
 		highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
 	" }
 	
-	" Command-t {
-        let g:CommandTSearchPath = $HOME . '/Code'
-	" }
-
 	" OmniComplete {
 		"if has("autocmd") && exists("+omnifunc")
 			"autocmd Filetype *
@@ -295,25 +278,11 @@
 
 	" SnipMate {
 		" Setting the author var
-        " If forking, please overwrite in your .vimrc.local file
-		let g:snips_author = 'Steve Francia <steve.francia@gmail.com>'
+		let g:snips_author = 'Richard Bateman <taxilian@gmail.com>'
 		" Shortcut for reloading snippets, useful when developing
 		nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 	" }
-
-	" NerdTree {
-		map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-		map <leader>e :NERDTreeFind<CR>
-		nmap <leader>nt :NERDTreeFind<CR>
-
-		let NERDTreeShowBookmarks=1
-		let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-		let NERDTreeChDirMode=0
-		let NERDTreeQuitOnOpen=1
-		let NERDTreeShowHidden=1
-		let NERDTreeKeepTreeInNewTab=1
-	" }
-
+	
 	" Richard's plugins {
 		" Fuzzy Finder {
 			""" Fuzzy Find file, tree, buffer, line
@@ -332,6 +301,21 @@
 		
 		" Buffer explorer {
 			nmap <leader>b :BufExplorer<CR>
+		" }
+		
+		" Project related {
+			map <C-p> <Plug>ToggleProject
+			map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+			map <leader>e :NERDTreeFind<CR>
+			nmap <leader>nt :NERDTreeFind<CR>
+
+            let NERDTreeShowBookmarks=1
+            let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+            let NERDTreeChDirMode=2
+            let NERDTreeQuitOnOpen=0
+            let NERDTreeShowHidden=1
+            let NERDTreeKeepTreeInNewTab=1
+			"au BufEnter * call NERDTreeInitAsNeeded()
 		" }
 		
 		" VCS commands {
@@ -383,11 +367,8 @@
 " GUI Settings {
 	" GVIM- (here instead of .gvimrc)
 	if has('gui_running')
-		set guioptions-=T          	" remove the toolbar
-		set lines=40               	" 40 lines of text instead of 24,
-		set transparency=5          " Make the window slightly transparent
-	else
-		set term=builtin_ansi       " Make arrow and other keys work
+		set guioptions-=T			" remove the toolbar
+		set lines=40				" 40 lines of text instead of 24,
 	endif
 " }
 
