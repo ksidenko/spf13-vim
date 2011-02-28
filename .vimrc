@@ -185,7 +185,8 @@
 	" } 
 	
 	" PIV {
-		let g:DisableAutoPHPFolding = 1
+		let g:DisableAutoPHPFolding = 0
+		"let cfu=phpcomplete#CompletePHP
 	" }
 	
 	" Supertab {
@@ -301,21 +302,6 @@
 		
 		" Buffer explorer {
 			nmap <leader>b :BufExplorer<CR>
-		" }
-		
-		" Project related {
-			map <C-p> <Plug>ToggleProject
-			map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-			map <leader>e :NERDTreeFind<CR>
-			nmap <leader>nt :NERDTreeFind<CR>
-
-            let NERDTreeShowBookmarks=1
-            let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-            let NERDTreeChDirMode=2
-            let NERDTreeQuitOnOpen=0
-            let NERDTreeShowHidden=1
-            let NERDTreeKeepTreeInNewTab=1
-			"au BufEnter * call NERDTreeInitAsNeeded()
 		" }
 		
 		" VCS commands {
