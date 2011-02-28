@@ -111,7 +111,7 @@
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
-	set gdefault					" the /g flag on :s substitutions by default
+	"set gdefault					" the /g flag on :s substitutions by default
 
 " }
 
