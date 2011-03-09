@@ -167,6 +167,13 @@
 	vnoremap < <gv
 	vnoremap > >gv 
 
+	" Fix home and end keybindings for screen, particularly on mac
+	" - for some reason this fixes the arrow keys too. huh.
+	map [F $
+	imap [F $
+	map [H g0
+	imap [H g0
+		
 	" For when you forget to sudo.. Really Write the file.
 	cmap w!! w !sudo tee % >/dev/null
 " }
