@@ -31,9 +31,6 @@
 [submodule ".vim/bundle/vim-markdown"]
 	path = .vim/bundle/vim-markdown
 	url = git://github.com/spf13/vim-markdown.git
-[submodule ".vim/bundle/easytags"]
-	path = .vim/bundle/easytags
-	url = http://github.com/spf13/vim-easytags.git
 [submodule ".vim/bundle/piv"]
 	path = .vim/bundle/piv
 	url = git://github.com/taxilian/PIV.git
