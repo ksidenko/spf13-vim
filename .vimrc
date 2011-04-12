@@ -286,15 +286,6 @@
 	" }
 	
 	" Richard's plugins {
-		" Fuzzy Finder {
-			""" Fuzzy Find file, tree, buffer, line
-			nmap <leader>ff :FufFile **/<CR>
-			nmap <leader>ft :FufFile<CR>
-			nmap <leader>fb :FufBuffer<CR>
-			nmap <leader>fl :FufLine<CR>
-			nmap <leader>fr :FufRenewCache<CR>
-		" }
-
 		" Session List {
 			set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 			nmap <leader>sl :SessionList<CR>
@@ -319,15 +310,6 @@
 			"au BufEnter * call NERDTreeInitAsNeeded()
 		" }
 
-		" VCS commands {
-			nmap <leader>vs :VCSStatus<CR>
-			nmap <leader>vc :VCSCommit<CR>
-			nmap <leader>vb :VCSBlame<CR>
-			nmap <leader>va :VCSAdd<CR>
-			nmap <leader>vd :VCSVimDiff<CR>
-			nmap <leader>vl :VCSLog<CR>
-			nmap <leader>vu :VCSUpdate<CR>
-		" }
 		" php-doc commands {
 			nmap <leader>pd :call PhpDocSingle()<CR>
 			vmap <leader>pd :call PhpDocRange()<CR>
@@ -359,6 +341,8 @@
 			let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
 		 " }
 
+         " C/C++ helper
+         map <leader>a :A<cr>
 		" JSON {
 			nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 		 " }
