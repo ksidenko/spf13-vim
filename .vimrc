@@ -69,9 +69,9 @@
 " }
 
 " Vim UI {
-	color blackboard				" load a colorscheme
-	set tabpagemax=15				" only show 15 tabs
-	set showmode					" display the current mode
+	color solarized   	       		" load a colorscheme
+	set tabpagemax=15 				" only show 15 tabs
+	set showmode                   	" display the current mode
 
 	set cursorline  				" highlight current line
 	hi cursorline guibg=#333333 	" highlight bg color of current line
@@ -107,25 +107,30 @@
 	set ignorecase					" case insensitive search
 	set smartcase					" case sensitive when uc present
 	set wildmenu					" show list instead of just completing
-	set wildmode=list:longest,full	" comand <Tab> completion, list matches, then longest common part, then all.
+	set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
 	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
 	"set gdefault					" the /g flag on :s substitutions by default
+	set gdefault					" the /g flag on :s substitutions by default
+    set list
+    set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
 " }
 
 " Formatting {
-	" set nowrap					" wrap long lines
-	set autoindent					" indent at the same level of the previous line
-	set shiftwidth=4				" use indents of 4 spaces
-	set expandtab					" tabs are spaces
-	set tabstop=4					" an indentation every four columns
-	set softtabstop=4				" a soft indentation every four columns
-	"set matchpairs+=<:>				" match, to be used with % 
-	"set pastetoggle=<F12>				" pastetoggle (sane indentation on pastes)
-	"set comments=sl:/*,mb:*,elx:*/  		" auto format comment blocks
+	set nowrap                     	" wrap long lines
+	set autoindent                 	" indent at the same level of the previous line
+	set shiftwidth=4               	" use indents of 4 spaces
+	set expandtab 	  	     		" tabs are spaces, not tabs
+	set tabstop=4 					" an indentation every four columns
+	set softtabstop=4 				" let backspace delete indent
+	"set matchpairs+=<:>            	" match, to be used with % 
+	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
+	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
+	" Remove trailing whitespaces and ^M chars
+	autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 " }
 
 " Python helpers {
@@ -158,6 +163,9 @@
 	nmap <leader>f7 :set foldlevel=7<CR>
 	nmap <leader>f8 :set foldlevel=8<CR>
 	nmap <leader>f9 :set foldlevel=9<CR>
+
+    "clearing highlighted search
+    nmap <silent> <leader>/ :nohlsearch<CR>
 
 	" Shortcuts
 	" Change Working Directory to that of the current file
@@ -255,7 +263,7 @@
         
 		" automatically open and close the popup menu / preview window
 		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-		set completeopt=menu,longest,preview
+		set completeopt=menu,preview,longest
 	" }
 	
 	" Ctags {
@@ -308,6 +316,14 @@
 			let NERDTreeShowHidden=1
 			let NERDTreeKeepTreeInNewTab=1
 			"au BufEnter * call NERDTreeInitAsNeeded()
+		" VCS commands {
+			nmap <leader>vs :VCSStatus<CR>
+			nmap <leader>vc :VCSCommit<CR>
+			nmap <leader>vb :VCSBlame<CR>
+			nmap <leader>va :VCSAdd<CR>
+			nmap <leader>vd :VCSVimDiff<CR>
+			nmap <leader>vl :VCSLog<CR>
+			nmap <leader>vu :VCSUpdate<CR>
 		" }
 
 		" php-doc commands {
@@ -341,7 +357,6 @@
 			let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
 		 " }
 
-         " C/C++ helper
 		" JSON {
 			nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 		 " }

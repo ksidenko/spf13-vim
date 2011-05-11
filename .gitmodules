@@ -27,7 +27,7 @@
 	url = http://github.com/tomtom/checksyntax_vim.git
 [submodule ".vim/bundle/command-t"]
 	path = .vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
+	url = git://github.com/wincent/Command-T.git
 [submodule ".vim/bundle/vim-markdown"]
 	path = .vim/bundle/vim-markdown
 	url = git://github.com/spf13/vim-markdown.git
@@ -55,3 +55,22 @@
 [submodule ".vim/bundle/surround"]
     path = .vim/bundle/surround
     url = git://github.com/spf13/vim-surround.git
+	url = git://github.com/leshill/vim-json.git
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/pydoc.vim"]
+	path = .vim/bundle/pydoc.vim
+	url = https://github.com/fs111/pydoc.vim.git
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule ".vim/bundle/python.vim"]
+	path = .vim/bundle/python.vim
+	url = https://github.com/vim-scripts/python.vim.git
+[submodule ".vim/bundle/python_match.vim"]
+	path = .vim/bundle/python_match.vim
+	url = https://github.com/vim-scripts/python_match.vim.git
+[submodule ".vim/bundle/pythoncomplete"]
+	path = .vim/bundle/pythoncomplete
+	url = https://github.com/vim-scripts/pythoncomplete.git
