@@ -50,7 +50,7 @@
 	set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 	set virtualedit=onemore 	   	" allow for cursor beyond last character
 	set history=1000  				" Store a ton of history (default is 20)
-	set spell 		 	        	" spell checking on
+	set nospell 	 	        	" spell checking off
 	
 	" Setting up the directories {
 		set backup 						" backups are nice ...
@@ -69,7 +69,11 @@
 " }
 
 " Vim UI {
-	color solarized   	       		" load a colorscheme
+    color wombat
+    if has("gui_running")
+        color herald
+    endif
+
 	set tabpagemax=15 				" only show 15 tabs
 	set showmode                   	" display the current mode
 
@@ -113,9 +117,10 @@
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
 	"set gdefault					" the /g flag on :s substitutions by default
-	set gdefault					" the /g flag on :s substitutions by default
     set list
     set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+    set wildignore+=*.o,*.obj,.bzr,.git,.hg,.svn,.DS_*,._*,.Trash*
+    set autoread
 
 " }
 
@@ -130,7 +135,8 @@
 	set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
-	autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+	autocmd FileType c,cpp,java,php,js,python,twig,xml,yml,css,javascript,html autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    autocmd BufEnter * :syntax sync minlines=500    
 " }
 
 " Python helpers {
