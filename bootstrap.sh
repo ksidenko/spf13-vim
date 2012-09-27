@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-endpath="$HOME/.spf13-vim-3"
+endpath="$HOME/.spf13-tax-vim-3"
 
 warn() {
     echo "$1" >&2
@@ -11,7 +11,7 @@ die() {
     exit 1
 }
 
-echo "thanks for installing spf13-vim\n"
+echo "thanks for installing taxilian's fork of spf13-vim\n"
 
 # Backup existing .vim stuff
 echo "backing up current vim config\n"
@@ -20,7 +20,7 @@ for i in $HOME/.vim $HOME/.vimrc $HOME/.gvimrc; do [ -e $i ] && [ ! -L $file ] &
 
 
 echo "cloning spf13-vim\n"
-git clone --recursive -b 3.0 http://github.com/spf13/spf13-vim.git $endpath
+git clone --recursive -b 3.0-new http://github.com/taxilian/spf13-vim.git $endpath
 mkdir -p $endpath/.vim/bundle
 ln -s $endpath/.vimrc $HOME/.vimrc
 ln -s $endpath/.vimrc.bundles $HOME/.vimrc.bundles
