@@ -1,0 +1,31 @@
+
+let g:DisableAutoPHPFolding = 1
+
+let NERDTreeQuitOnOpen = 0
+set nospell
+
+if has('gui_running')
+    if has("gui_gtk2")
+        set guifont=Andale\ Mono\ Regular\ 14,Menlo\ Regular\ 13,Consolas\ Regular\ 14,Courier\ New\ Regular\ 16
+    else
+        set guifont=Andale\ Mono\ Regular:h14,Menlo\ Regular:h13,Consolas\ Regular:h14,Courier\ New\ Regular:h16
+    endif
+    if has('gui_macvim')
+        set transparency=2          " Make the window slightly transparent
+    endif
+endif
+
+" ShowMarks {
+    let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    " Don't leave on by default, use :ShowMarksOn to enable
+    let g:showmarks_enable = 0
+    " For marks a-z
+    highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
+    " For marks A-Z
+    highlight ShowMarksHLu gui=bold guibg=LightRed guifg=DarkRed
+    " For all other marks
+    highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
+    " For multiple marks on the same line.
+    highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
+" }
+set autoread                    " automatically reads, helpful when VCS may have changed the file

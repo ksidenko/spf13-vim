@@ -1,0 +1,46 @@
+
+let g:spf13_leader = '\'
+let g:spf13_no_autochdir = 1
+let g:spf13_no_fastTabs = 1
+let g:spf13_no_keyfixes = 1
+
+if !exists(g:spf13_bundle_groups)
+    let g:spf13_bundle_groups=['neocomplcache', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'scala']
+endif
+
+let g:spf13_override_snippets = 1
+
+if !exists(g:tax_override_snippets)
+    " Snippets
+        Bundle 'taxilian/snipmate-snippets'
+endif
+
+" Color schemes
+    Bundle 'taxilian/Wombat'
+    Bundle 'taxilian/herald.vim'
+
+" Programming
+    Bundle 'taxilian/a.vim.git'
+    if !exists(g:tax_disable_showmarks)
+        Bundle 'ShowMarks'
+    endif
+
+" General
+    if !exists(g:tax_disable_general)
+        Bundle 'scrooloose/nerdtree'
+        Bundle 'altercation/vim-colors-solarized'
+        Bundle 'spf13/vim-colors'
+        Bundle 'tpope/vim-surround'
+        Bundle 'AutoClose'
+        Bundle 'kien/ctrlp.vim'
+        Bundle 'vim-scripts/sessionman.vim'
+        Bundle 'matchit.zip'
+        Bundle 'Lokaltog/vim-powerline'
+        Bundle 'Lokaltog/vim-easymotion'
+        Bundle 'godlygeek/csapprox'
+        Bundle 'jistr/vim-nerdtree-tabs'
+        Bundle 'flazz/vim-colorschemes'
+        Bundle 'corntrace/bufexplorer'
+        Bundle 'mbbill/undotree'
+        "Bundle 'myusuf3/numbers.vim'
+    endif
