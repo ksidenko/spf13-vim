@@ -9,5 +9,6 @@ call mklink %HOME%\.vimrc %BASE_DIR%\.vimrc
 call mklink %HOME%\.vimrc.fork %BASE_DIR%\.vimrc.fork
 call mklink %HOME%\.vimrc.bundles.fork %BASE_DIR%\.vimrc.bundles.fork
 call mklink %HOME%\_vimrc %BASE_DIR%\.vimrc
+call mklink %HOME%\.vimrc.bundles %BASE_DIR%\.vimrc.bundles
 
 call git clone http://github.com/gmarik/vundle.git %HOME%/.vim/bundle/vundle
