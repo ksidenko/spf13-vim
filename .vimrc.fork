@@ -5,6 +5,7 @@ let NERDTreeQuitOnOpen = 0
 set nospell
 
 if has('gui_running')
+    color Wombat
     if has("gui_gtk2")
         set guifont=Andale\ Mono\ Regular\ 14,Menlo\ Regular\ 13,Consolas\ Regular\ 14,Courier\ New\ Regular\ 16
     else
