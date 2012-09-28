@@ -1,5 +1,7 @@
 
-let g:spf13_leader = '\'
+if !exists("g:spf13_leader")
+    let g:spf13_leader = '\'
+endif
 let g:spf13_no_autochdir = 1
 let g:spf13_no_fastTabs = 1
 let g:spf13_no_keyfixes = 1
@@ -27,7 +29,10 @@ endif
 
 " General
     if !exists("g:tax_disable_general")
-        Bundle 'scrooloose/nerdtree'
+        " Unfortunately the scooloose/nerdtree has a long-standing bug with
+        " single click on the left bar; they haven't accepted the 6 month old
+        " pull request, so I'm using my own fork with the fix in it
+        Bundle 'taxilian/nerdtree'
         Bundle 'altercation/vim-colors-solarized'
         Bundle 'spf13/vim-colors'
         Bundle 'tpope/vim-surround'
