@@ -90,6 +90,7 @@
             Bundle 'corntrace/bufexplorer'
             Bundle 'mbbill/undotree'
             Bundle 'myusuf3/numbers.vim'
+            Bundle 'nathanaelkane/vim-indent-guides'
         endif
 
     " General Programming
@@ -109,19 +110,15 @@
     " Snippets & AutoComplete
         if count(g:spf13_bundle_groups, 'snipmate')
             Bundle 'garbas/vim-snipmate'
-            if !exists("g:spf13_override_snippets")
-                Bundle 'honza/snipmate-snippets'
-            endif
+            Bundle 'honza/snipmate-snippets'
             " Source support_function.vim to support snipmate-snippets.
             if filereadable(expand("~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim"))
                 source ~/.vim/bundle/snipmate-snippets/snippets/support_functions.vim
             endif
         elseif count(g:spf13_bundle_groups, 'neocomplcache')
             Bundle 'Shougo/neocomplcache'
-            Bundle 'Shougo/neocomplcache-snippets-complete'
-            if !exists("g:spf13_override_snippets")
-                Bundle 'honza/snipmate-snippets'
-            endif
+            Bundle 'Shougo/neosnippet'
+            Bundle 'honza/snipmate-snippets'
         endif
 
     " PHP
@@ -171,6 +168,7 @@
             Bundle 'tpope/vim-markdown'
             Bundle 'spf13/vim-preview'
             Bundle 'tpope/vim-cucumber'
+            Bundle 'quentindecock/vim-cucumber-align-pipes'
             Bundle 'Puppet-Syntax-Highlighting'
         endif
 

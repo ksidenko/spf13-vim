@@ -18,7 +18,6 @@
 " Environment {
     " Basics {
         set nocompatible        " must be first line
-        set background=dark     " Assume a dark background
         if has ("unix") && "Darwin" != system("echo -n \"$(uname)\"")
           " on Linux use + register for copy-paste
           set clipboard=unnamedplus
@@ -35,9 +34,18 @@
           set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
         endif
     " }
-    "
+
+    " Filetype Workarounds {
+        " Temporary workaround to Better-CSS-Syntax-for-Vim
+        " See https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim/issues/9
+        " for more information
+        autocmd BufNewFile,BufRead *.scss set filetype=css
+        autocmd BufNewFile,BufRead *.sass set filetype=css
+    " }
+
     " Setup Bundle Support {
     " The next three lines ensure that the ~/.vim/bundle/ system works
+        filetype on
         filetype off
         set rtp+=~/.vim/bundle/vundle
         call vundle#rc()
@@ -346,34 +354,16 @@
     " }
 
     " Tabularize {
-        if exists(":Tabularize")
-          nmap <Leader>a= :Tabularize /=<CR>
-          vmap <Leader>a= :Tabularize /=<CR>
-          nmap <Leader>a: :Tabularize /:<CR>
-          vmap <Leader>a: :Tabularize /:<CR>
-          nmap <Leader>a:: :Tabularize /:\zs<CR>
-          vmap <Leader>a:: :Tabularize /:\zs<CR>
-          nmap <Leader>a, :Tabularize /,<CR>
-          vmap <Leader>a, :Tabularize /,<CR>
-          nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-          vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
-          " The following function automatically aligns when typing a
-          " supported character
-          inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-          function! s:align()
-              let p = '^\s*|\s.*\s|\s*$'
-              if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-                  let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-                  let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-                  Tabularize/|/l1
-                  normal! 0
-                  call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-              endif
-          endfunction
-
-        endif
+        nmap <Leader>a= :Tabularize /=<CR>
+        vmap <Leader>a= :Tabularize /=<CR>
+        nmap <Leader>a: :Tabularize /:<CR>
+        vmap <Leader>a: :Tabularize /:<CR>
+        nmap <Leader>a:: :Tabularize /:\zs<CR>
+        vmap <Leader>a:: :Tabularize /:\zs<CR>
+        nmap <Leader>a, :Tabularize /,<CR>
+        vmap <Leader>a, :Tabularize /,<CR>
+        nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+        vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
      " }
 
      " Session List {
@@ -496,7 +486,22 @@
      " }
 
      " UndoTree {
-        nnoremap <c-u> :UndotreeToggle<CR>
+        nnoremap <Leader>u :UndotreeToggle<CR>
+        let g:undotree_SetFocusWhenToggle=1 " if undotree is opened, it is likely one wants to interact with it.
+     " }
+
+     " indent_guides {
+        if !exists('g:spf13_no_indent_guides_autocolor')
+            let g:indent_guides_auto_colors = 1
+        else
+            " for some colorscheme ,autocolor will not work,like 'desert','ir_black'.
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#212121   ctermbg=3
+            autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=4
+        endif
+        set ts=4 sw=4 et
+        let g:indent_guides_start_level = 2
+        let g:indent_guides_guide_size = 1
+        let g:indent_guides_enable_on_vim_startup = 1
      " }
 
 " }
