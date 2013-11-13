@@ -7,9 +7,9 @@ set nospell
 if has('gui_running')
     color wombat_btl
     if has("gui_gtk2")
-        set guifont=Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 10,Consolas\ Regular\ 11,Courier\ New\ Regular\ 13
+        set guifont=Anonymous\ Pro\ 14,Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 10,Consolas\ Regular\ 11,Courier\ New\ Regular\ 13
     else
-        set guifont=Andale\ Mono\ Regular:h14,Menlo\ Regular:h13,Consolas\ Regular:h14,Courier\ New\ Regular:h16
+        set guifont=Anonymous\ Pro:h14,Andale\ Mono\ Regular:h14,Menlo\ Regular:h13,Consolas\ Regular:h14,Courier\ New\ Regular:h16
     endif
     if has('gui_macvim')
         set transparency=2          " Make the window slightly transparent
