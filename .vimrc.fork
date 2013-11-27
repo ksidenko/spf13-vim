@@ -1,7 +1,6 @@
 
 let g:DisableAutoPHPFolding = 1
 
-let NERDTreeQuitOnOpen = 0
 set nospell
 
 if has('gui_running')
@@ -35,4 +34,5 @@ set autoread                    " automatically reads, helpful when VCS may have
     let g:nerdtree_tabs_open_on_gui_startup=1
     let g:nerdtree_tabs_open_on_new_tab=1
     let NERDTreeMouseMode=1
+    let NERDTreeChDirMode=2
 " }
