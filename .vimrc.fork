@@ -36,3 +36,7 @@ set autoread                    " automatically reads, helpful when VCS may have
     let NERDTreeMouseMode=1
     let NERDTreeChDirMode=2
 " }
+
+" JSON {
+let g:vim_json_syntax_conceal = 0
+" }
