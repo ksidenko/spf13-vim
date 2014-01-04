@@ -36,16 +36,28 @@ endif
         Bundle 'altercation/vim-colors-solarized'
         Bundle 'spf13/vim-colors'
         Bundle 'tpope/vim-surround'
-        Bundle 'AutoClose'
+        Bundle 'spf13/vim-autoclose'
         Bundle 'kien/ctrlp.vim'
+        Bundle 'terryma/vim-multiple-cursors'
         Bundle 'vim-scripts/sessionman.vim'
         Bundle 'matchit.zip'
-        Bundle 'Lokaltog/vim-powerline'
+        if (has("python") || has("python3")) && exists('g:spf13_use_powerline') && !exists('g:spf13_use_old_powerline')
+            Bundle 'Lokaltog/powerline', {'rtp':'/powerline/bindings/vim'}
+        elseif exists('g:spf13_use_powerline') && exists('g:spf13_use_old_powerline')
+            Bundle 'Lokaltog/vim-powerline'
+        else
+            Bundle 'bling/vim-airline'
+        endif
         Bundle 'Lokaltog/vim-easymotion'
         Bundle 'godlygeek/csapprox'
         Bundle 'jistr/vim-nerdtree-tabs'
         Bundle 'flazz/vim-colorschemes'
-        Bundle 'corntrace/bufexplorer'
         Bundle 'mbbill/undotree'
         "Bundle 'myusuf3/numbers.vim'
+        Bundle 'nathanaelkane/vim-indent-guides'
+        if !exists('g:spf13_no_views')
+            Bundle 'vim-scripts/restore_view.vim'
+        endif
+        Bundle 'airblade/vim-gitgutter'
+        Bundle 'tpope/vim-abolish.git'
     endif
