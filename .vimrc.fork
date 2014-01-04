@@ -37,6 +37,8 @@ set autoread                    " automatically reads, helpful when VCS may have
     let NERDTreeChDirMode=2
 " }
 
+let g:pymode_lint_ignore="E501,E309,E251,C901,E701"
+
 " JSON {
 let g:vim_json_syntax_conceal = 0
 " }
