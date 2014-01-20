@@ -35,6 +35,7 @@ set autoread                    " automatically reads, helpful when VCS may have
     let g:nerdtree_tabs_open_on_new_tab=1
     let NERDTreeMouseMode=1
     let NERDTreeChDirMode=2
+    let NERDTreeQuitOnOpen=0
 " }
 
 let g:pymode_lint_ignore="E501,E309,E251,C901,E701"
