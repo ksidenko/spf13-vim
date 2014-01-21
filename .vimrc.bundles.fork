@@ -20,6 +20,11 @@ endif
     Bundle 'taxilian/Wombat'
     Bundle 'taxilian/herald.vim'
 
+" HTML
+if count(g:spf13_bundle_groups, 'html')
+    Bundle 'othree/html5.vim'
+endif
+
 " Programming
     Bundle 'taxilian/a.vim.git'
     if !exists("g:tax_disable_showmarks")
