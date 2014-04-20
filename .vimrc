@@ -71,7 +71,7 @@
     scriptencoding utf-8
 
     if has('clipboard')
-        if LINUX()   " On Linux use + register for copy-paste
+        if has('unnamedplus')  " When possible use + register for copy-paste
             set clipboard=unnamedplus
         else         " On mac and Windows, use * register for copy-paste
             set clipboard=unnamed
@@ -216,7 +216,7 @@
     " .vimrc.before.local file:
     "   let g:spf13_keep_trailing_whitespace = 1
     autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    "autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
     " preceding line best in a plugin but here for now.
@@ -263,33 +263,44 @@
     noremap j gj
     noremap k gk
 
-    " Same for 0, home, end, etc
-    function! WrapRelativeMotion(key, ...)
-        let vis_sel=""
-        if a:0
-            let vis_sel="gv"
-        endif
-        if &wrap
-            execute "normal!" vis_sel . "g" . a:key
-        else
-            execute "normal!" vis_sel . a:key
-        endif
-    endfunction
+    " End/Start of line motion keys act relative to row/wrap width in the
+    " presence of `:set wrap`, and relative to line for `:set nowrap`.
+    " Default vim behaviour is to act relative to text line in both cases
+    " If you prefer the default behaviour, add the following to your
+    " .vimrc.before.local file:
+    "   let g:spf13_no_wrapRelMotion = 1
+    if !exists('g:spf13_no_wrapRelMotion')
+        " Same for 0, home, end, etc
+        function! WrapRelativeMotion(key, ...)
+            let vis_sel=""
+            if a:0
+                let vis_sel="gv"
+            endif
+            if &wrap
+                execute "normal!" vis_sel . "g" . a:key
+            else
+                execute "normal!" vis_sel . a:key
+            endif
+        endfunction
 
-    " Map g* keys in Normal, Operator-pending, and Visual+select (over written
-    " below) modes
-    noremap $ :call WrapRelativeMotion("$")<CR>
-    noremap <End> :call WrapRelativeMotion("$")<CR>
-    noremap 0 :call WrapRelativeMotion("0")<CR>
-    noremap <Home> :call WrapRelativeMotion("0")<CR>
-    noremap ^ :call WrapRelativeMotion("^")<CR>
-    " Over write the Visual+Select mode mappings to ensure correct mode is
-    " passed to WrapRelativeMotion
-    vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-    vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-    vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
+        " Map g* keys in Normal, Operator-pending, and Visual+select
+        noremap $ :call WrapRelativeMotion("$")<CR>
+        noremap <End> :call WrapRelativeMotion("$")<CR>
+        noremap 0 :call WrapRelativeMotion("0")<CR>
+        noremap <Home> :call WrapRelativeMotion("0")<CR>
+        noremap ^ :call WrapRelativeMotion("^")<CR>
+        " Overwrite the operator pending $/<End> mappings from above
+        " to force inclusive motion with :execute normal!
+        onoremap $ v:call WrapRelativeMotion("$")<CR>
+        onoremap <End> v:call WrapRelativeMotion("$")<CR>
+        " Overwrite the Visual+select mode mappings from above
+        " to ensure the correct vis_sel flag is passed to function
+        vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
+        vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
+        vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
+        vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
+        vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
+    endif
 
     " The following two lines conflict with moving to top and
     " bottom of the screen
@@ -360,13 +371,6 @@
     " http://stackoverflow.com/a/8064607/127816
     vnoremap . :normal .<CR>
 
-    " Fix home and end keybindings for screen, particularly on mac
-    " - for some reason this fixes the arrow keys too. huh.
-    map [F $
-    imap [F $
-    map [H g0
-    imap [H g0
-
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
 
@@ -389,6 +393,9 @@
     map zl zL
     map zh zH
 
+    " Easier formatting
+    nnoremap <silent> <leader>q gwip
+
     " FIXME: Revert this f70be548
     " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
     map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
@@ -396,6 +403,28 @@
 " }
 
 " Plugins {
+
+    " TextObj Sentence {
+        if count(g:spf13_bundle_groups, 'writing')
+            augroup textobj_sentence
+              autocmd!
+              autocmd FileType markdown call textobj#sentence#init()
+              autocmd FileType textile call textobj#sentence#init()
+              autocmd FileType text call textobj#sentence#init()
+            augroup END
+        endif
+    " }
+
+    " TextObj Quote {
+        if count(g:spf13_bundle_groups, 'writing')
+            augroup textobj_quote
+                autocmd!
+                autocmd FileType markdown call textobj#quote#init()
+                autocmd FileType textile call textobj#quote#init()
+                autocmd FileType text call textobj#quote#init({'educate': 0})
+            augroup END
+        endif
+    " }
 
     " PIV {
         let g:DisableAutoPHPFolding = 0
@@ -408,28 +437,32 @@
     " }
 
     " OmniComplete {
-        if has("autocmd") && exists("+omnifunc")
-            autocmd Filetype *
-                \if &omnifunc == "" |
-                \setlocal omnifunc=syntaxcomplete#Complete |
-                \endif
+        " To disable omni complete, add the following to your .vimrc.before.local file:
+        "   let g:spf13_no_omni_complete = 1
+        if !exists('g:spf13_no_omni_complete')
+            if has("autocmd") && exists("+omnifunc")
+                autocmd Filetype *
+                    \if &omnifunc == "" |
+                    \setlocal omnifunc=syntaxcomplete#Complete |
+                    \endif
+            endif
+
+            hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+            hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+            hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+            " Some convenient mappings
+            inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+            inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+            inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+            inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+            inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+            inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+            " Automatically open and close the popup menu / preview window
+            au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+            set completeopt=menu,preview,longest
         endif
-
-        hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-        hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-        hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-        " Some convenient mappings
-        inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-        inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-        inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-        inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-        inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-        inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-        " Automatically open and close the popup menu / preview window
-        au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-        set completeopt=menu,preview,longest
     " }
 
     " Ctags {
@@ -570,7 +603,7 @@
         nnoremap <silent> <leader>gi :Git add -p %<CR>
         nnoremap <silent> <leader>gg :SignifyToggle<CR>
     "}
-    
+
     " YouCompleteMe {
         if count(g:spf13_bundle_groups, 'youcompleteme')
             let g:acp_enableAtStartup = 0
@@ -582,7 +615,7 @@
             let g:UltiSnipsExpandTrigger = '<C-j>'
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-            
+
             " Enable omni completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -600,8 +633,10 @@
             endif
 
             " For snippet_complete marker.
-            if has('conceal')
-                set conceallevel=2 concealcursor=i
+            if !exists("g:spf13_no_conceal")
+                if has('conceal')
+                    set conceallevel=2 concealcursor=i
+                endif
             endif
 
             " Disable the neosnippet preview candidate window
@@ -653,6 +688,8 @@
                     inoremap <expr> <C-d>   pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
                     inoremap <expr> <C-u>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
                 else
+                    " <C-k> Complete Snippet
+                    " <C-k> Jump to next snippet point
                     imap <silent><expr><C-k> neosnippet#expandable() ?
                                 \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
                                 \ "\<C-e>" : "\<Plug>(neosnippet_expand_or_jump)")
@@ -660,13 +697,28 @@
 
                     inoremap <expr><C-g> neocomplete#undo_completion()
                     inoremap <expr><C-l> neocomplete#complete_common_string()
-                    inoremap <expr><CR> neocomplete#complete_common_string()
+                    "inoremap <expr><CR> neocomplete#complete_common_string()
 
                     " <CR>: close popup
                     " <s-CR>: close popup and save indent.
                     inoremap <expr><s-CR> pumvisible() ? neocomplete#close_popup()"\<CR>" : "\<CR>"
-                    inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
+                    "inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
 
+                    function! CleverCr()
+                        if pumvisible()
+                            if neosnippet#expandable()
+                                let exp = "\<Plug>(neosnippet_expand)"
+                                return exp . neocomplete#close_popup()
+                            else
+                                return neocomplete#close_popup()
+                            endif
+                        else
+                            return "\<CR>"
+                        endif
+                    endfunction
+
+                    " <CR> close popup and save indent or expand snippet 
+                    imap <expr> <CR> CleverCr() 
                     " <C-h>, <BS>: close popup and delete backword char.
                     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
                     inoremap <expr><C-y> neocomplete#close_popup()
@@ -674,6 +726,29 @@
                 " <TAB>: completion.
                 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
                 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+
+                " Courtesy of Matteo Cavalleri
+
+                function! CleverTab()
+                    if pumvisible()
+                        return "\<C-n>"
+                    endif 
+                    let substr = strpart(getline('.'), 0, col('.') - 1)
+                    let substr = matchstr(substr, '[^ \t]*$')
+                    if strlen(substr) == 0
+                        " nothing to match on empty string
+                        return "\<Tab>"
+                    else
+                        " existing text matching
+                        if neosnippet#expandable_or_jumpable()
+                            return "\<Plug>(neosnippet_expand_or_jump)"
+                        else
+                            return neocomplete#start_manual_complete()
+                        endif
+                    endif
+                endfunction
+
+                imap <expr> <Tab> CleverTab()
             " }
 
             " Enable heavy omni completion.
@@ -734,12 +809,28 @@
 
                     inoremap <expr><C-g> neocomplcache#undo_completion()
                     inoremap <expr><C-l> neocomplcache#complete_common_string()
-                    inoremap <expr><CR> neocomplcache#complete_common_string()
+                    "inoremap <expr><CR> neocomplcache#complete_common_string()
+
+                    function! CleverCr()
+                        if pumvisible()
+                            if neosnippet#expandable()
+                                let exp = "\<Plug>(neosnippet_expand)"
+                                return exp . neocomplcache#close_popup()
+                            else
+                                return neocomplcache#close_popup()
+                            endif
+                        else
+                            return "\<CR>"
+                        endif
+                    endfunction
+
+                    " <CR> close popup and save indent or expand snippet 
+                    imap <expr> <CR> CleverCr()
 
                     " <CR>: close popup
                     " <s-CR>: close popup and save indent.
                     inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup()"\<CR>" : "\<CR>"
-                    inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+                    "inoremap <expr><CR> pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 
                     " <C-h>, <BS>: close popup and delete backword char.
                     inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
@@ -770,7 +861,9 @@
             let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
     " }
     " Normal Vim omni-completion {
-        else
+    " To disable omni complete, add the following to your .vimrc.before.local file:
+    "   let g:spf13_no_omni_complete = 1
+        elseif !exists('g:spf13_no_omni_complete')
             " Enable omni-completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
             autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -799,6 +892,9 @@
                     set conceallevel=2 concealcursor=i
                 endif
             endif
+
+            " Enable neosnippets when using go
+            let g:go_snippet_engine = "neosnippet"
 
             " Disable the neosnippet preview candidate window
             " When enabled, there can be too much visual noise
