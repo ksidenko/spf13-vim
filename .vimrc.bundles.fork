@@ -1,16 +1,3 @@
-
-let g:spf13_no_autochdir = 1
-let g:spf13_no_fastTabs = 1
-let g:spf13_no_keyfixes = 1
-
-if !exists("g:spf13_bundle_groups")
-    " This is the original, for comparison
-    " let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'php', 'ruby', 'python', 'go', 'twig', 'javascript', 'haskell', 'html', 'misc', 'scala']
-    let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'php', 'ruby', 'python', 'go', 'twig', 'javascript', 'haskell', 'html', 'misc', 'scala']
-endif
-
-let g:spf13_override_snippets = 1
-
 if !exists("g:tax_override_snippets")
     " Snippets
     Bundle 'taxilian/snipmate-snippets'
