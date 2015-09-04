@@ -38,6 +38,10 @@ set autoread                    " automatically reads, helpful when VCS may have
     let NERDTreeQuitOnOpen=0
 " }
 
+" CtrlP {
+    let g:ctrlp_working_path_mode = 'rw'
+" }
+
 let g:pymode_lint_ignore="E501,E309,E251,C901,E701"
 
 " JSON {
