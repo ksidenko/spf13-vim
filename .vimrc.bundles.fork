@@ -1,6 +1,7 @@
 if !exists("g:tax_override_snippets")
     " Snippets
     Bundle 'taxilian/snipmate-snippets'
+    Bundle 'bloveridge/Jasmine-snippets-for-snipMate'
 endif
 
 " Color schemes
