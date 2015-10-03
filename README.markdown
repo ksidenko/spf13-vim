@@ -22,6 +22,8 @@ Great care has been taken to ensure that each plugin plays nicely with others, a
 Lastly (and perhaps, most importantly) It is completely cross platform. It works well on Windows, Linux and OSX without any modifications or additional configurations. If you are using [MacVim] or Gvim additional features are enabled. So regardless of your environment just clone and run.
 
 # Installation
+## Requirements
+To make all the plugins work, specifically [neocomplete](https://github.com/Shougo/neocomplete.vim), you need [vim with lua](https://github.com/Shougo/neocomplete.vim#requirements).
 
 ## Linux, \*nix, Mac OSX Installation
 
@@ -202,6 +204,19 @@ file to pull down your fork.
 
 For an example of a fork of spf13-vim that provides customization in this manner see [taxilian's fork](https://github.com/taxilian/spf13-vim).
 
+### Easily Editing Your Configuration
+
+`<Leader>ev` opens a new tab containing the .vimrc configuration files listed above. This makes it easier to get an overview of your
+configuration and make customizations.
+
+`<Leader>sv` sources the .vimrc file, instantly applying your customizations to the currently running vim instance.
+
+These two mappings can themselves be customized by setting the following in .vimrc.before.local:
+```bash
+let g:spf13_edit_config_mapping='<Leader>ev'
+let g:spf13_apply_config_mapping='<Leader>sv'
+```
+
 # Plugins
 
 spf13-vim contains a curated set of popular vim plugins, colors, snippets and syntaxes. Great care has been made to ensure that these plugins play well together and have optimal configuration.
@@ -255,7 +270,7 @@ Undotree makes that feature more accessible by creating a visual representation 
 
 NERDTree is a file explorer plugin that provides "project drawer"
 functionality to your vim editing.  You can learn more about it with
-:help NERDTree.
+`:help NERDTree`.
 
 **QuickStart** Launch using `<Leader>e`.
 
@@ -386,10 +401,10 @@ PIV provides:
 
 ![php vim itegration image][phpmanual-img]
 
-## Ack.vim
+## [Ack.vim]
 
 Ack.vim uses ack to search inside the current directory for a pattern.
-You can learn more about it with :help Ack
+You can learn more about it with `:help Ack`
 
 **QuickStart** :Ack
 
@@ -539,6 +554,7 @@ Here's some tips if you've never used VIM before:
 [Powerline]:https://github.com/lokaltog/powerline
 [Powerline Fonts]:https://github.com/Lokaltog/powerline-fonts
 [AutoClose]:https://github.com/spf13/vim-autoclose
+[Ack.vim]:https://github.com/mileszs/ack.vim
 
 [spf13-vim-img]:https://i.imgur.com/UKToY.png
 [spf13-vimrc-img]:https://i.imgur.com/kZWj1.png
