@@ -36,3 +36,20 @@ set autoread                    " automatically reads, helpful when VCS may have
     let g:nerdtree_tabs_open_on_new_tab=1
     let NERDTreeMouseMode=1
 " }
+
+" Make sure escape always takes you out of neocomplettion mode
+    iunmap <expr> <Esc>
+
+" Configure typescript completion
+set nocompatible
+set completeopt+=menuone
+set rtp+=~/.vim/bundle/neocomplete.vim/
+set rtp+=~/.vim/bundle/vimproc.vim/
+set rtp+=~/.cache/neocomplete/tsuquyomi/
+
+filetype plugin indent on
+let g:neocomplete#enable_at_startup = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'

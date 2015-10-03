@@ -1,0 +1,16 @@
+
+if !exists("g:spf13_leader")
+    let g:spf13_leader = '\'
+endif
+let g:spf13_no_autochdir = 1
+let g:spf13_no_fastTabs = 1
+let g:spf13_no_keyfixes = 1
+let g:spf13_no_views = 1
+let g:spf13_noninvasive_completion = 1
+let g:spf13_no_conceal = 1
+
+if !exists("g:spf13_bundle_groups")
+    let g:spf13_bundle_groups=['neocomplcache', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'scala']
+endif
+
+let g:spf13_override_snippets = 1
