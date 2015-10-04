@@ -41,6 +41,10 @@ set autoread                    " automatically reads, helpful when VCS may have
     iunmap <expr> <Esc>
 
 " Configure typescript completion
+
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
 set nocompatible
 set completeopt+=menuone
 set rtp+=~/.vim/bundle/neocomplete.vim/

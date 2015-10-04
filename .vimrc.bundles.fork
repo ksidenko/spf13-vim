@@ -16,6 +16,9 @@ endif
     endif
 
     Bundle 'Shougo/vimproc.vim'
+    Bundle 'Shougo/unite.vim'
+    Bundle 'Shougo/unite-outline'
+    Bundle 'jason0x43/vim-js-indent'
     Bundle 'leafgarland/typescript-vim'
     Bundle 'Quramy/tsuquyomi'
     Bundle 'mattn/emmet-vim'
