@@ -1,25 +1,21 @@
-
-let g:DisableAutoPHPFolding = 1
-
-let NERDTreeQuitOnOpen = 0
 set nospell
+set autoread        " automatically reads, helpful when VCS may have changed the file
 
-if has('gui_running')
-    color wombat_btl
-    if has("gui_gtk2")
-        set guifont=Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 10,Consolas\ Regular\ 11,Courier\ New\ Regular\ 13
-    else
-        set guifont=Andale\ Mono\ Regular:h14,Menlo\ Regular:h13,Consolas\ Regular:h14,Courier\ New\ Regular:h16
-    endif
-    if has('gui_macvim')
-        set transparency=2          " Make the window slightly transparent
-    endif
-endif
+"iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
+
+filetype plugin indent on
+
+
+" XkbSwitch {
+    let g:XkbSwitchEnabled = 1
+    let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+    let g:XkbSwitchSkipFt = [ 'nerdtree' ]
+" }
 
 " ShowMarks {
     let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     " Don't leave on by default, use :ShowMarksOn to enable
-    let g:showmarks_enable = 0
+    let g:showmarks_enable = 1
     " For marks a-z
     highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
     " For marks A-Z
@@ -29,31 +25,43 @@ endif
     " For multiple marks on the same line.
     highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
 " }
-set autoread                    " automatically reads, helpful when VCS may have changed the file
 
 " NERDTree {
+    autocmd VimEnter * NERDTree
+    let NERDTreeShowBookmarks=1
+    let NERDTreeShowLineNumbers = 1
+    let NERDTreeShowHidden=1
+    let NERDTreeWinSize = 45
+    let NERDTreeMinimalUI = 1
+    let NERDTreeDirArrows = 1
+    let NERDTreeChDirMode=1
+    let NERDTreeMouseMode=2
+    let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.hg$', '^\.svn$', '\.bzr$']
     let g:nerdtree_tabs_open_on_gui_startup=1
     let g:nerdtree_tabs_open_on_new_tab=1
-    let NERDTreeMouseMode=1
+    let NERDTreeMouseMode=2
+    let NERDTreeQuitOnOpen = 0
+    "nnoremap <leader><k> <plug>NERDTreeTabsToggle<CR>
 " }
 
-" Make sure escape always takes you out of neocomplettion mode
-    iunmap <expr> <Esc>
+" PIV {
+    let g:DisableAutoPHPFolding = 1
+    let g:PIVAutoClose = 0
+" }
 
-" Configure typescript completion
+" elm-vim {
+    au FileType elm nmap <leader>b <Plug>(elm-make)
+    au FileType elm nmap <leader>m <Plug>(elm-make-main)
+    au FileType elm nmap <leader>t <Plug>(elm-test)
+    au FileType elm nmap <leader>r <Plug>(elm-repl)
+    au FileType elm nmap <leader>e <Plug>(elm-error-detail)
+    au FileType elm nmap <leader>d <Plug>(elm-show-docs)
+    au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-
-set nocompatible
-set completeopt+=menuone
-set rtp+=~/.vim/bundle/neocomplete.vim/
-set rtp+=~/.vim/bundle/vimproc.vim/
-set rtp+=~/.cache/neocomplete/tsuquyomi/
-
-filetype plugin indent on
-let g:neocomplete#enable_at_startup = 1
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
+    :au BufWritePost *.elm :ElmMakeMain
+    let g:elm_jump_to_error = 1
+    let g:elm_make_output_file = "index.html"
+    let g:elm_make_shw_warnings = 0
+    let g:elm_browser_command = ""
+    let g:elm_detailed_complete = 0
+" }
