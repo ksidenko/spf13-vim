@@ -1,6 +1,8 @@
 set nospell
 set autoread        " automatically reads, helpful when VCS may have changed the file
 
+set diffopt+=vertical
+
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
 " XkbSwitch {
@@ -12,7 +14,7 @@ set autoread        " automatically reads, helpful when VCS may have changed the
 " ShowMarks {
     let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     " Don't leave on by default, use :ShowMarksOn to enable
-    let g:showmarks_enable = 1
+    let g:showmarks_enable = 0
     " For marks a-z
     highlight ShowMarksHLl gui=bold guibg=LightBlue guifg=Blue
     " For marks A-Z
@@ -61,6 +63,8 @@ set autoread        " automatically reads, helpful when VCS may have changed the
     let g:elm_make_shw_warnings = 0
     let g:elm_browser_command = ""
     let g:elm_detailed_complete = 0
+
+    au BufRead,BufNewFile *.elm set sw=2 ts=2 expandtab
 " }
 
 
