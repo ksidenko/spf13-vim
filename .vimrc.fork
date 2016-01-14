@@ -5,13 +5,16 @@ set diffopt+=vertical
 
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
+if isdirectory(expand("~/.vim/bundle/XkbSwitch/"))
 " XkbSwitch {
     let g:XkbSwitchEnabled = 1
     let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
     let g:XkbSwitchSkipFt = [ 'nerdtree' ]
 " }
+endif
 
-" ShowMarks {
+
+if isdirectory(expand("~/.vim/bundle/ShowMarks/"))
     let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     " Don't leave on by default, use :ShowMarksOn to enable
     let g:showmarks_enable = 0
@@ -23,8 +26,10 @@ set diffopt+=vertical
     highlight ShowMarksHLo gui=bold guibg=LightYellow guifg=DarkYellow
     " For multiple marks on the same line.
     highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
-" }
+endif
 
+
+if isdirectory(expand("~/.vim/bundle/NERDTree/"))
 " NERDTree {
     autocmd VimEnter * NERDTree
     let NERDTreeShowBookmarks=1
@@ -42,12 +47,18 @@ set diffopt+=vertical
     let NERDTreeQuitOnOpen = 0
     "nnoremap <leader><k> <plug>NERDTreeTabsToggle<CR>
 " }
+endif
 
+
+if isdirectory(expand("~/.vim/bundle/PIV/"))
 " PIV {
     let g:DisableAutoPHPFolding = 1
     let g:PIVAutoClose = 0
 " }
+endif
 
+
+if isdirectory(expand("~/.vim/bundle/elm-vim/"))
 " elm-vim {
     au FileType elm nmap <leader>b <Plug>(elm-make)
     au FileType elm nmap <leader>m <Plug>(elm-make-main)
@@ -64,10 +75,14 @@ set diffopt+=vertical
     let g:elm_browser_command = ""
     let g:elm_detailed_complete = 0
 
+    let g:elm_make_rootpath = ".."
+    let g:elm_make_filepath_prefix = "src/"
     au BufRead,BufNewFile *.elm set sw=2 ts=2 expandtab
 " }
+endif
 
 
+if isdirectory(expand("~/.vim/bundle/vimux/"))
 " vimux {
     let g:VimuxHeight = "30"
 
@@ -92,6 +107,26 @@ set diffopt+=vertical
     " Zoom the runner pane (use <bind-key> z to restore runner pane)
     map <Leader>vz :call VimuxZoomRunner()<CR>)"
 " }
+endif
+
+if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+    nnoremap <silent> <leader>gs :Gstatus<CR>
+    nnoremap <silent> <leader>gd :Gdiff<CR>
+    nnoremap <silent> <leader>gdf :Git diff<CR>
+    nnoremap <silent> <leader>gc :Gcommit<CR>
+    nnoremap <silent> <leader>gb :Gblame<CR>
+    nnoremap <silent> <leader>gl :Glog<CR>
+    nnoremap <silent> <leader>glg :Git lg<CR>
+    nnoremap <silent> <leader>gp :Git pull<CR>
+    nnoremap <silent> <leader>gpu :Gpush<CR>
+    nnoremap <silent> <leader>gpun :Git push -u<CR>
+    nnoremap <silent> <leader>gr :Gread<CR>
+    nnoremap <silent> <leader>gw :Gwrite<CR>
+    nnoremap <silent> <leader>ge :Gedit<CR>
+    " Mnemonic _i_nteractive
+    nnoremap <silent> <leader>gi :Git add -p %<CR>
+    nnoremap <silent> <leader>gg :SignifyToggle<CR>
+endif
 
 
 " { http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
@@ -137,3 +172,4 @@ set diffopt+=vertical
     " Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
     cabbrev delview <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Delview' : 'delview')<CR>
 " }
+

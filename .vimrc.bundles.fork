@@ -2,8 +2,10 @@ Plugin 'lyokha/vim-xkbswitch'
 
 Plugin 'vim-scripts/ShowMarks'
 
-Plugin 'elmcast/elm-vim'
+Plugin 'ksidenko/elm-vim'
 Plugin 'benmills/vimux'
+
+Plugin 'tpope/vim-obsession'
 
 "Plugin 'garybernhardt/dotfiles', {'rtp': '.vim/colors'}
 
