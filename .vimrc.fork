@@ -3,9 +3,6 @@ set autoread        " automatically reads, helpful when VCS may have changed the
 
 set diffopt+=vertical
 
-set path+=./**5
-set suffixesadd=.elm
-set includeexpr=substitute(v:fname,'\\.','/','g')
 
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
@@ -79,9 +76,11 @@ if isdirectory(expand("~/.vim/bundle/elm-vim/"))
     let g:elm_browser_command = ""
     let g:elm_detailed_complete = 0
 
-    let g:elm_make_rootpath = ".."
-    let g:elm_make_filepath_prefix = "src/"
-    au BufRead,BufNewFile *.elm set sw=2 ts=2 expandtab
+    let g:elm_make_rootpath = "."
+    let g:elm_make_filepath_prefix = "./"
+    "set path+=./**5
+    set suffixesadd=.elm
+    au BufRead,BufNewFile *.elm set sw=2 ts=2 expandtab includeexpr=substitute(v:fname,'\\.','/','g')
 " }
 endif
 
@@ -195,7 +194,8 @@ if isdirectory(expand("~/.vim/bundle/neocomplete.vim/"))
 endif
 
 if isdirectory(expand("~/.vim/bundle/vim-localvimrc/"))
-    let g:localvimrc_ask = 0
+    let g:localvimrc_ask = 1
+    let g:localvimrc_persistent = 1
 endif
 
 " { http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
