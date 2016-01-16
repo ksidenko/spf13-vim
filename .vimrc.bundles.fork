@@ -7,6 +7,8 @@ Plugin 'benmills/vimux'
 
 Plugin 'tpope/vim-obsession'
 
+Plugin 'embear/vim-localvimrc'
+
 "Plugin 'garybernhardt/dotfiles', {'rtp': '.vim/colors'}
 
 "Plugin "orlandov/vimfluence"
