@@ -6,14 +6,13 @@ set diffopt+=vertical
 
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
-if isdirectory(expand("~/.vim/bundle/XkbSwitch/"))
-" XkbSwitch {
+if isdirectory(expand("~/.vim/bundle/vim-xkbswitch/"))
     let g:XkbSwitchEnabled = 1
-    let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+    let g:XkbSwitchLib = '/usr/local/bin/libxkbswitch.dylib'
     let g:XkbSwitchSkipFt = [ 'nerdtree' ]
-" }
+    let g:XkbSwitchNLayout = 'us'
+    "let g:XkbSwitchIMappings = ['ru']
 endif
-
 
 if isdirectory(expand("~/.vim/bundle/ShowMarks/"))
     let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
