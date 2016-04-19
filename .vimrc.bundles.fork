@@ -12,8 +12,8 @@ Plugin 'embear/vim-localvimrc'
 "Plugin 'garybernhardt/dotfiles', {'rtp': '.vim/colors'}
 
 "Plugin "orlandov/vimfluence"
-"Plugin 'neilagabriel/vim-geeknote'
-
+Plugin 'neilagabriel/im-geeknote'
+Plugin 'fatih/vim-go'
 "Plugin 'ivalkeen/nerdtree-execute'
 
 "Plugin 'lambdatoast/elm.vim'
