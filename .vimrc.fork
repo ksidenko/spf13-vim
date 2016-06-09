@@ -7,7 +7,7 @@ set diffopt+=vertical
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
 if isdirectory(expand("~/.vim/bundle/vim-xkbswitch/"))
-    let g:XkbSwitchEnabled = 1
+    let g:XkbSwitchEnabled = 0
     let g:XkbSwitchLib = '/usr/local/bin/libxkbswitch.dylib'
     let g:XkbSwitchSkipFt = [ 'nerdtree' ]
     let g:XkbSwitchNLayout = 'us'
@@ -284,8 +284,8 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
 
     let g:go_fmt_autosave = 1
 
-    let g:go_metalinter_autosave = 1
-    let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+    let g:go_metalinter_autosave = 0
+    let g:go_metalinter_enabled = [ 'golint', 'errcheck']
     let g:go_metalinter_autosave_enabled = ['vet', 'golint']
     let g:go_metalinter_deadline = "10s"
 
