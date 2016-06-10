@@ -14,6 +14,7 @@ Plugin 'embear/vim-localvimrc'
 "Plugin "orlandov/vimfluence"
 Plugin 'neilagabriel/vim-geeknote'
 Plugin 'fatih/vim-go'
+Plugin 'tpope/vim-dispatch'
 "Plugin 'ivalkeen/nerdtree-execute'
 
 "Plugin 'lambdatoast/elm.vim'
