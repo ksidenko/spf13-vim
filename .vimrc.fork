@@ -32,9 +32,9 @@ endif
 if isdirectory(expand("~/.vim/bundle/NERDTree/"))
 " NERDTree {
     autocmd VimEnter * NERDTree
-    let NERDTreeShowBookmarks=1
+    let NERDTreeShowBookmarks=0
     let NERDTreeShowLineNumbers = 1
-    let NERDTreeShowHidden=1
+    let NERDTreeShowHidden=0
     let NERDTreeWinSize = 45
     let NERDTreeMinimalUI = 1
     let NERDTreeDirArrows = 1
