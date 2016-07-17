@@ -130,6 +130,9 @@ if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
 endif
 
+if isdirectory(expand("~/.vim/bundle/fugitive-gitlab.vim/"))
+    let g:fugitive_gitlab_domains = ['https://gitlab.2gis.ru', 'https://gitlab.com']
+endif
 
 if isdirectory(expand("~/.vim/bundle/neocomplete.vim/"))
     "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
