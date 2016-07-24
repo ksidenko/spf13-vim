@@ -296,3 +296,92 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
 endif
 
 autocmd FileType crontab setlocal nowritebackup
+
+
+
+"====[ Make the 81st column stand out ]====================
+    "" EITHER the entire 81st column, full-screen...
+    "highlight ColorColumn ctermbg=magenta
+    "set colorcolumn=81
+    " OR ELSE just the 81st column of wide lines...
+    highlight ColorColumn ctermbg=magenta
+    call matchadd('ColorColumn', '\%81v', 100)
+
+"=====[ Highlight matches when jumping to next ]=============
+
+    " This rewires n and N to do the highlighing...
+    nnoremap <silent> n   n:call HLNext(0.3)<cr>
+    nnoremap <silent> N   N:call HLNext(0.3)<cr>
+
+    " OR ELSE briefly hide everything except the match...
+    function! HLNext (blinktime)
+        highlight BlackOnBlack ctermfg=black ctermbg=black
+        let [bufnum, lnum, col, off] = getpos('.')
+        let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+        let hide_pat = '\%<'.lnum.'l.'
+                \ . '\|'
+                \ . '\%'.lnum.'l\%<'.col.'v.'
+                \ . '\|'
+                \ . '\%'.lnum.'l\%>'.(col+matchlen-1).'v.'
+                \ . '\|'
+                \ . '\%>'.lnum.'l.'
+        let ring = matchadd('BlackOnBlack', hide_pat, 101)
+        redraw
+        exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+        call matchdelete(ring)
+        redraw
+    endfunction
+
+"====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
+
+    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+    set list
+
+"====[ Swap v and CTRL-V, because Block mode is more useful that Visual mode "]======
+
+    nnoremap    v   <c-v>
+    nnoremap <c-v>     v
+
+    vnoremap    v   <c-v>
+    vnoremap <c-v>     v
+
+"====[ Always turn on syntax highlighting for diffs ]=========================
+
+    " EITHER select by the file-suffix directly...
+    augroup PatchDiffHighlight
+        autocmd!
+        autocmd BufEnter  *.patch,*.rej,*.diff   syntax enable
+    augroup END
+
+    " OR ELSE use the filetype mechanism to select automatically...
+    filetype on
+    augroup PatchDiffHighlight
+        autocmd!
+        autocmd FileType  diff   syntax enable
+    augroup END
+
+"====[ Make CTRL-K list diagraphs before each digraph entry ]===============
+
+    inoremap <expr> <C-K> ShowDigraphs()
+
+    function! ShowDigraphs ()
+        digraphs
+        call getchar()
+        return "\<C-K>"
+    endfunction
+
+    " But also consider the hudigraphs.vim and betterdigraphs.vim plugins,
+    " which offer smarter and less intrusive alternatives
+
+vmap <expr>  ++  VMATH_YankAndAnalyse()
+nmap         ++  vip++
+
+if isdirectory(expand("~/.vim/bundle/Damian-Conway-s-Vim-Setup/"))
+    let g:DVB_TrimWS = 1
+    vmap  <expr>  <S-LEFT>        DVB_Drag('left')                         ##
+    vmap  <expr>  <S-RIGHT>        DVB_Drag('right')                        ##
+    vmap  <expr>  <S-DOWN>       DVB_Drag('down')                         ##
+    vmap  <expr>  <S-UP>       DVB_Drag('up')                           ##
+
+    vmap <expr> D DVB_Duplicate()
+endif
