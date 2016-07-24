@@ -1,6 +1,9 @@
-Plugin 'lyokha/vim-xkbswitch'
+"let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
+"Plugin 'lyokha/vim-xkbswitch'
 
 Plugin 'vim-scripts/ShowMarks'
+"Plugin 'tpope/vim-markdown'
 
 Plugin 'ksidenko/elm-vim'
 Plugin 'benmills/vimux'
@@ -19,7 +22,7 @@ Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'Damian-Conway-s-Vim
 Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'vmath.vim', 'rtp': '/blob/master/plugin/vmath.im' }
 Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'dragvisuals.vim', 'rtp': '/blob/master/plugin/dragvisuals.vim' }
 "Plugin 'ivalkeen/nerdtree-execute'
-
+Plugin 'sks7777/fugitive-gitlab.vim'
 "Plugin 'lambdatoast/elm.vim'
     "nnoremap <leader>el :ElmEvalLine<CR>
     "vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
