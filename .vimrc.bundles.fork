@@ -19,6 +19,8 @@ Plugin 'neilagabriel/vim-geeknote'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-dispatch'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'tpope/vim-unimpaired'
+
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'Damian-Conway-s-Vim-Setup', 'rtp': '/blob/master/plugin/betterdigraphs.vim' }
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'vmath.vim', 'rtp': '/blob/master/plugin/vmath.im' }
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'dragvisuals.vim', 'rtp': '/blob/master/plugin/dragvisuals.vim' }
