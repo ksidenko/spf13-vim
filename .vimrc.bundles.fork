@@ -25,7 +25,8 @@ Plugin 'tpope/vim-unimpaired'
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'vmath.vim', 'rtp': '/blob/master/plugin/vmath.im' }
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'dragvisuals.vim', 'rtp': '/blob/master/plugin/dragvisuals.vim' }
 "Plugin 'ivalkeen/nerdtree-execute'
-Plugin 'sks7777/fugitive-gitlab.vim'
+Plugin 'ksidenko/fugitive-gitlab.vim'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 "Plugin 'lambdatoast/elm.vim'
     "nnoremap <leader>el :ElmEvalLine<CR>
     "vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
