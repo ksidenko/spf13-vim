@@ -17,6 +17,7 @@ Plugin 'embear/vim-localvimrc'
 "Plugin "orlandov/vimfluence"
 Plugin 'neilagabriel/vim-geeknote'
 Plugin 'fatih/vim-go'
+Plugin 'andrewradev/splitjoin.vim'
 Plugin 'tpope/vim-dispatch'
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'Damian-Conway-s-Vim-Setup', 'rtp': '/blob/master/plugin/betterdigraphs.vim' }
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'vmath.vim', 'rtp': '/blob/master/plugin/vmath.im' }
