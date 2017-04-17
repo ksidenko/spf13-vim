@@ -1,8 +1,14 @@
 set nospell
-set autoread        " automatically reads, helpful when VCS may have changed the file
+set autoread                    " automatically reads, helpful when VCS may have changed the file
+set autowrite                   " Automatically save before :next, :make etc.
 
 set diffopt+=vertical
 
+set updatetime=100
+
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
 "iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
 
@@ -216,7 +222,7 @@ endif
       endif
     endfunc
 
-    nnoremap <C-n> :call NumberToggle()<cr>
+    "nnoremap <C-n> :call NumberToggle()<cr>
 
     :au FocusLost * :set number
     :au FocusGained * :set relativenumber
@@ -313,7 +319,9 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']  }
 
-    let g:go_test_timeout= '10s'
+    let g:go_test_timeout = '10s'
+    let g:go_auto_type_info = 1
+    let g:go_auto_sameids = 1
 
     " build_go_files is a custom function that builds or compiles the test file.
     " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
