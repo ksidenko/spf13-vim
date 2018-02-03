@@ -37,7 +37,7 @@ endif
 
 if isdirectory(expand("~/.vim/bundle/NERDTree/"))
 " NERDTree {
-    autocmd VimEnter * NERDTree
+    "autocmd VimEnter * NERDTree
     let NERDTreeShowBookmarks=0
     let NERDTreeShowLineNumbers = 1
     let NERDTreeShowHidden=0
@@ -47,10 +47,10 @@ if isdirectory(expand("~/.vim/bundle/NERDTree/"))
     let NERDTreeChDirMode=1
     let NERDTreeMouseMode=2
     let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.hg$', '^\.svn$', '\.bzr$']
-    let g:nerdtree_tabs_open_on_gui_startup=1
-    let g:nerdtree_tabs_open_on_new_tab=1
+    let g:nerdtree_tabs_open_on_gui_startup=0
+    let g:nerdtree_tabs_open_on_new_tab=0
     let NERDTreeMouseMode=2
-    let NERDTreeQuitOnOpen = 0
+    let NERDTreeQuitOnOpen = 1
     "nnoremap <leader><k> <plug>NERDTreeTabsToggle<CR>
 " }
 endif
@@ -145,60 +145,60 @@ if isdirectory(expand("~/.vim/bundle/neocomplete.vim/"))
     " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
     " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_ignore_case = 'ignorecase'
-    let g:neocomplete#enable_auto_delimiter = 0
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 2
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+    let g:neocomplete#enable_at_startup = 0
+    "" Use smartcase.
+    "let g:neocomplete#enable_smart_case = 1
+    "let g:neocomplete#enable_ignore_case = 'ignorecase'
+    "let g:neocomplete#enable_auto_delimiter = 0
+    "" Set minimum syntax keyword length.
+    "let g:neocomplete#sources#syntax#min_keyword_length = 2
+    "let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    "" Define dictionary.
+    "let g:neocomplete#sources#dictionary#dictionaries = {
+        "\ 'default' : '',
+        "\ 'vimshell' : $HOME.'/.vimshell_hist',
+        "\ 'scheme' : $HOME.'/.gosh_completions'
+        "\ }
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    "" Define keyword.
+    "if !exists('g:neocomplete#keyword_patterns')
+        "let g:neocomplete#keyword_patterns = {}
+    "endif
+    "let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
+    "" Plugin key-mappings.
+    "inoremap <expr><C-g>     neocomplete#undo_completion()
+    "inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    "inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    "function! s:my_cr_function()
-      "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? "\<C-y>" : "\<CR>"
-    "endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-    " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    "" Recommended key-mappings.
+    "" <CR>: close popup and save indent.
+    ""inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    ""function! s:my_cr_function()
+      ""return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+      "" For no inserting <CR> key.
+      ""return pumvisible() ? "\<C-y>" : "\<CR>"
+    ""endfunction
+    "" <TAB>: completion.
+    "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    "" <C-h>, <BS>: close popup and delete backword char.
+    "inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    "inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    "" Close popup by <Space>.
+    ""inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+    "" AutoComplPop like behavior.
+    ""let g:neocomplete#enable_auto_select = 1
+    "" Enable omni completion.
+    "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "" Enable heavy omni completion.
+    "if !exists('g:neocomplete#sources#omni#input_patterns')
+      "let g:neocomplete#sources#omni#input_patterns = {}
+    "endif
+    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 endif
 
 if isdirectory(expand("~/.vim/bundle/vim-localvimrc/"))
@@ -206,9 +206,36 @@ if isdirectory(expand("~/.vim/bundle/vim-localvimrc/"))
     let g:localvimrc_persistent = 1
 endif
 
+if isdirectory(expand("~/.vim/bundle/Shougo/"))
+    " neocomplete like
+    set completeopt+=noinsert
+    " deoplete.nvim recommend
+    set completeopt+=noselect
+    set completeopt+=preview
+    set completeopt+=menu
+    " Run deoplete.nvim automatically
+    let g:deoplete#enable_at_startup = 1
 
-if isdirectory(expand("~/.vim/bundle/vim-geeknote/"))
-    let g:GeeknoteFormat="markdown"
+    "https://github.com/zchee/deoplete-go#available-settings
+    let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+    let g:deoplete#sources#go#package_dot = 1
+    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+    let g:deoplete#sources#go#pointer = 1
+
+    "https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
+	" Use smartcase.
+	let g:deoplete#enable_smart_case = 1
+    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+	" <C-h>, <BS>: close popup and delete backword char.
+	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
+	" <CR>: close popup
+	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	function! s:my_cr_function() abort
+	  return deoplete#close_popup()
+	endfunction
 endif
 
 " { http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
@@ -261,12 +288,13 @@ endif
 
 if isdirectory(expand("~/.vim/bundle/vim-go"))
     " Show by default 4 spaces for a tab
-    autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+    autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
 
     au FileType go nmap <leader>r <Plug>(go-run)
     au FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
     au FileType go nmap <leader>t <Plug>(go-test)
     au FileType go nmap <leader>c <Plug>(go-coverage)
+    au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 
     au FileType go nmap <Leader>s <Plug>(go-def-split)
     au FileType go nmap <Leader>v <Plug>(go-def-vertical)
@@ -313,15 +341,18 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
 
     let g:go_metalinter_autosave = 0
     let g:go_metalinter_enabled = [ 'golint', 'errcheck']
-    let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+    "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+    let g:go_metalinter_autosave_enabled = []
     let g:go_metalinter_deadline = "10s"
 
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']  }
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    let g:syntastic_javascript_checkers = ['eslint']
 
     let g:go_test_timeout = '10s'
     let g:go_auto_type_info = 1
-    let g:go_auto_sameids = 1
+    let g:go_auto_sameids = 0
+    let g:go_updatetime = 1500
 
     " build_go_files is a custom function that builds or compiles the test file.
     " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
@@ -374,8 +405,8 @@ autocmd FileType crontab setlocal nowritebackup
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
 
-    exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-    set list
+    "exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+    "set list
 
 "====[ Swap v and CTRL-V, because Block mode is more useful that Visual mode "]======
 
@@ -426,4 +457,8 @@ if isdirectory(expand("~/.vim/bundle/Damian-Conway-s-Vim-Setup/"))
     vmap  <expr>  <S-UP>       DVB_Drag('up')                           ##
 
     vmap <expr> D DVB_Duplicate()
+endif
+
+if isdirectory(expand("~/.vim/bundle/vim-jsx/"))
+    let g:jsx_ext_required = 0
 endif
