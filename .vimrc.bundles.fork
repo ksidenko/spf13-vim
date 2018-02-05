@@ -1,7 +1,7 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
 let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
 "Plugin 'lyokha/vim-xkbswitch'
-
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ShowMarks'
 "Plugin 'tpope/vim-markdown'
 
@@ -14,12 +14,17 @@ Plugin 'embear/vim-localvimrc'
 
 "Plugin 'garybernhardt/dotfiles', {'rtp': '.vim/colors'}
 
-"Plugin "orlandov/vimfluence"
-Plugin 'neilagabriel/vim-geeknote'
+"Plugin 'orlandov/vimfluence'
 Plugin 'fatih/vim-go'
-Plugin 'andrewradev/splitjoi.vim'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'zchee/deoplete-go', {'do': 'make'}
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'garyburd/go-explorer'
 Plugin 'tpope/vim-dispatch'
+
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'buoto/gotests-vim'
@@ -31,6 +36,10 @@ Plugin 'buoto/gotests-vim'
 Plugin 'ksidenko/fugitive-gitlab.vim'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'dkprice/vim-easygrep'
+" react js support
+"Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 "Plugin 'lambdatoast/elm.vim'
     "nnoremap <leader>el :ElmEvalLine<CR>
     "vnoremap <leader>es :<C-u>ElmEvalSelection<CR>
