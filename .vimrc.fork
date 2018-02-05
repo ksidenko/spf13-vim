@@ -344,8 +344,8 @@ autocmd FileType crontab setlocal nowritebackup
     "highlight ColorColumn ctermbg=magenta
     "set colorcolumn=81
     " OR ELSE just the 81st column of wide lines...
-    highlight ColorColumn ctermbg=magenta
-    call matchadd('ColorColumn', '\%81v', 100)
+    "highlight ColorColumn ctermbg=magenta
+    "call matchadd('ColorColumn', '\%81v', 100)
 
 "=====[ Highlight matches when jumping to next ]=============
 
@@ -427,3 +427,5 @@ if isdirectory(expand("~/.vim/bundle/Damian-Conway-s-Vim-Setup/"))
 
     vmap <expr> D DVB_Duplicate()
 endif
+
+au BufRead /tmp/psql.edit.* set syntax=sql
