@@ -1,12 +1,13 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
+"let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
+let g:spf13_bundle_groups=['general', 'writing', 'programming', 'php', 'html']
 "Plugin 'lyokha/vim-xkbswitch'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ShowMarks'
 "Plugin 'tpope/vim-markdown'
 
-Plugin 'ksidenko/elm-vim'
-Plugin 'benmills/vimux'
+"Plugin 'ksidenko/elm-vim'
+"Plugin 'benmills/vimux'
 
 Plugin 'tpope/vim-obsession'
 
@@ -24,10 +25,15 @@ Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'garyburd/go-explorer'
 Plugin 'tpope/vim-dispatch'
-
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'buoto/gotests-vim'
+
+"Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'Shougo/neosnippet-snippets'
+"Plugin 'SirVer/ultisnips'
+
+"Plugin 'ekalinin/Dockerfile.vim'
+"Plugin 'tpope/vim-unimpaired'
 
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'Damian-Conway-s-Vim-Setup', 'rtp': '/blob/master/plugin/betterdigraphs.vim' }
 "Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup', { 'name': 'vmath.vim', 'rtp': '/blob/master/plugin/vmath.im' }
@@ -38,7 +44,7 @@ Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'dkprice/vim-easygrep'
 " react js support
 "Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+"Plugin 'mxw/vim-jsx'
 
 "Plugin 'lambdatoast/elm.vim'
     "nnoremap <leader>el :ElmEvalLine<CR>
