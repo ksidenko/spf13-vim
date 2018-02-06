@@ -141,11 +141,11 @@ if isdirectory(expand("~/.vim/bundle/fugitive-gitlab.vim/"))
 endif
 
 if isdirectory(expand("~/.vim/bundle/neocomplete.vim/"))
-    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 0
+    ""Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    "" Disable AutoComplPop.
+    "let g:acp_enableAtStartup = 0
+    "" Use neocomplete.
+    "let g:neocomplete#enable_at_startup = 1
     "" Use smartcase.
     "let g:neocomplete#enable_smart_case = 1
     "let g:neocomplete#enable_ignore_case = 'ignorecase'
@@ -211,25 +211,34 @@ if isdirectory(expand("~/.vim/bundle/Shougo/"))
     set completeopt+=noinsert
     " deoplete.nvim recommend
     set completeopt+=noselect
-    set completeopt+=preview
-    set completeopt+=menu
     " Run deoplete.nvim automatically
     let g:deoplete#enable_at_startup = 1
+    if !exists('g:deoplete#omni#input_patterns')
+      let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:deoplete#disable_auto_complete = 0
+    let g:deoplete#complete_method = 'complete'
+
 
     "https://github.com/zchee/deoplete-go#available-settings
     let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
     let g:deoplete#sources#go#package_dot = 1
     let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-    let g:deoplete#sources#go#pointer = 1
+    let g:deoplete#sources#go#pointer = 0
 
     "https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
 	" Use smartcase.
 	let g:deoplete#enable_smart_case = 1
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    let g:deoplete#disable_auto_complete = 0
+
+    " deoplete
+    "imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+    "imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+    "imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
 
 	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+	"inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+	"inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 	" <CR>: close popup
 	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -324,6 +333,7 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:go_fmt_command = "goimports"
     let g:go_autodetect_gopath = 1
     let g:go_list_type = "quickfix"
+    let g:go_fmt_fail_silently = 1
 
     let g:go_highlight_types = 1
     let g:go_highlight_fields = 1
@@ -331,7 +341,15 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:go_highlight_methods = 1
     let g:go_highlight_extra_types = 1
     let g:go_highlight_generate_tags = 1
-    let g:go_fmt_fail_silently = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_highlight_function_arguments = 1
+    let g:go_highlight_function_calls = 1
+    let g:go_highlight_string_spellcheck = 1
+    let g:go_highlight_format_strings = 1
+    let g:go_highlight_variable_declarations = 1
+    let g:go_highlight_variable_assignments = 1
 
     " Open :GoDeclsDir with ctrl-g
     nmap <C-g> :GoDeclsDir<cr>
@@ -341,8 +359,8 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
 
     let g:go_metalinter_autosave = 0
     let g:go_metalinter_enabled = [ 'golint', 'errcheck']
-    "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-    let g:go_metalinter_autosave_enabled = []
+    let g:go_metalinter_disabled = []
+    let g:go_metalinter_autosave_enabled = ['vet', 'golint']
     let g:go_metalinter_deadline = "10s"
 
     let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -353,6 +371,17 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:go_auto_type_info = 1
     let g:go_auto_sameids = 0
     let g:go_updatetime = 1500
+    let g:go_info_mode = 'guru'
+    "let g:go_info_mode = 'gocode'
+    let g:go_jump_to_error = 0
+    let g:go_def_reuse_buffer = 1
+    let g:go_snippet_engine = "automatic"
+    "let g:go_snippet_engine = "ultisnips"
+    "let g:go_snippet_engine = "neosnippet"
+    "let g:go_snippet_engine = "minisnip"
+    let g:go_gocode_autobuild = 1
+    let g:go_gocode_propose_builtins = 1
+    let g:go_gocode_unimported_packages = 0
 
     " build_go_files is a custom function that builds or compiles the test file.
     " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file

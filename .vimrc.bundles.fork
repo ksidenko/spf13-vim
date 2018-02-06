@@ -1,6 +1,6 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
-let g:spf13_bundle_groups=['general', 'writing', 'programming', 'php', 'html']
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
 "Plugin 'lyokha/vim-xkbswitch'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ShowMarks'
@@ -17,20 +17,21 @@ Plugin 'embear/vim-localvimrc'
 
 "Plugin 'orlandov/vimfluence'
 Plugin 'fatih/vim-go'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'zchee/deoplete-go', {'do': 'make'}
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'zchee/deoplete-go', {'do': 'make'}
+"Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'garyburd/go-explorer'
 Plugin 'tpope/vim-dispatch'
 Plugin 'buoto/gotests-vim'
 
-"Plugin 'Shougo/neocomplete'
-"Plugin 'Shougo/neosnippet'
-"Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
 "Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
 
 "Plugin 'ekalinin/Dockerfile.vim'
 "Plugin 'tpope/vim-unimpaired'
