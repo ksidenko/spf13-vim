@@ -1,6 +1,10 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
 let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
+UnBundle 'kristijanhusak/vim-multiple-cursors'
+UnBundle 'bling/vim-bufferline'
+UnBundle 'nathanaelkane/vim-indent-guides'
+
 "Plugin 'lyokha/vim-xkbswitch'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/ShowMarks'
@@ -28,8 +32,8 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'buoto/gotests-vim'
 
 Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'Shougo/neosnippet-snippets'
 "Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
 
