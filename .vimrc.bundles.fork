@@ -1,5 +1,4 @@
-"let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming']
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming',]
 UnBundle 'kristijanhusak/vim-multiple-cursors'
 UnBundle 'bling/vim-bufferline'
 UnBundle 'nathanaelkane/vim-indent-guides'
