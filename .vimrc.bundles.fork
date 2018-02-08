@@ -1,9 +1,12 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
-"let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming', 'php', 'html']
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming']
 UnBundle 'kristijanhusak/vim-multiple-cursors'
 UnBundle 'bling/vim-bufferline'
 UnBundle 'nathanaelkane/vim-indent-guides'
+UnBundle 'vim-scripts/sessionman.vim'
+UnBundle 'mattn/webapi-vim'
+UnBundle 'tpope/vim-abolish.git'
+UnBundle 'mattn/gist-vim'
 
 "Plugin 'lyokha/vim-xkbswitch'
 Plugin 'vim-airline/vim-airline-themes'
