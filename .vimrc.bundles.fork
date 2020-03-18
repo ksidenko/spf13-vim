@@ -1,4 +1,5 @@
-let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming',]
+"let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming',]
+let g:spf13_bundle_groups=['general', 'writing', 'programming',]
 UnBundle 'kristijanhusak/vim-multiple-cursors'
 UnBundle 'bling/vim-bufferline'
 UnBundle 'nathanaelkane/vim-indent-guides'
@@ -7,13 +8,15 @@ UnBundle 'mattn/webapi-vim'
 UnBundle 'tpope/vim-abolish.git'
 UnBundle 'mattn/gist-vim'
 
+UnBundle 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
+
 "Plugin 'lyokha/vim-xkbswitch'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-scripts/ShowMarks'
+"Plugin 'vim-scripts/ShowMarks'
 "Plugin 'tpope/vim-markdown'
 
 "Plugin 'ksidenko/elm-vim'
-"Plugin 'benmills/vimux'
 
 Plugin 'tpope/vim-obsession'
 
@@ -24,16 +27,18 @@ Plugin 'embear/vim-localvimrc'
 "Plugin 'orlandov/vimfluence'
 Plugin 'fatih/vim-go'
 "Plugin 'Shougo/deoplete.nvim'
-"Plugin 'zchee/deoplete-go', {'do': 'make'}
-"Plugin 'nsf/gocode', {'rtp': 'vim/'}
 "Plugin 'roxma/nvim-yarp'
 "Plugin 'roxma/vim-hug-neovim-rpc'
+
+"Plugin 'zchee/deoplete-go', {'do': 'make'}
+Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
+
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'garyburd/go-explorer'
 Plugin 'tpope/vim-dispatch'
 Plugin 'buoto/gotests-vim'
 
-Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neocomplete'
 "Plugin 'Shougo/neosnippet'
 "Plugin 'Shougo/neosnippet-snippets'
 "Plugin 'SirVer/ultisnips'
@@ -61,3 +66,24 @@ Plugin 'dkprice/vim-easygrep'
     "":au BufWritePost *.elm ElmMakeCurrentFile
     ":au BufWritePost *.elm ElmMakeFile("Main.elm")
     "":au! BufWritePost *.elm
+
+
+"Plugin 'klen/python-mode'	        " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
+"Plugin 'davidhalter/jedi-vim' 		" Jedi-vim autocomplete plugin
+"Plugin 'mitsuhiko/vim-jinja'		" Jinja support for vim
+"Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
+"Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'nvie/vim-flake8'
+
+" Use release branch
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+"Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+Plugin 'benmills/vimux'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'sebdah/vim-delve'
+
+Plugin 'morhetz/gruvbox'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'gosukiwi/vim-atom-dark'

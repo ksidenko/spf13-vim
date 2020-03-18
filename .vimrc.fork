@@ -10,7 +10,55 @@ map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
-"iunmap <expr> <Esc> " Make sure escape always takes you out of neocomplettion mode
+set nocursorcolumn
+syntax sync minlines=256
+set re=1
+
+g:ctrlp_by_filename = 1
+
+"https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
+"https://github.com/morhetz/gruvbox/wiki/Configuration
+"https://github.com/morhetz/gruvbox#palette
+
+let g:gruvbox_underline=1
+let g:gruvbox_undercurl=1
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_light='soft'
+let g:gruvbox_hls_cursor='bg0'
+let g:gruvbox_number_column='bg1'
+let g:gruvbox_vert_split='blue'
+let g:gruvbox_invert_selection=0
+let g:gruvbox_invert_indent_guides=1
+colorscheme gruvbox
+
+"https://github.com/lifepillar/vim-solarized8
+let g:solarized_visibility='high'
+let g:solarized_diffmode='normal'
+let g:solarized_statusline='low'
+let g:solarized_old_cursor_style=0
+"colorscheme solarized8
+
+"colorscheme atom-dark-256
+"colorscheme molokai
+
+
+set background=dark    " Setting dark mode
+"set background=light   " Setting light mode
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 if isdirectory(expand("~/.vim/bundle/vim-xkbswitch/"))
     let g:XkbSwitchEnabled = 0
@@ -51,6 +99,9 @@ if isdirectory(expand("~/.vim/bundle/NERDTree/"))
     let g:nerdtree_tabs_open_on_new_tab=0
     let NERDTreeMouseMode=2
     let NERDTreeQuitOnOpen = 1
+    let g:NERDTreeDirArrows=0
+    let NERDTreeDirArrowExpandable='+'
+    let NERDTreeDirArrowCollapsible='~'
     "nnoremap <leader><k> <plug>NERDTreeTabsToggle<CR>
 " }
 endif
@@ -91,11 +142,28 @@ endif
 
 
 if isdirectory(expand("~/.vim/bundle/vimux/"))
+    :au BufWritePost *.elm :ElmMakeMain
+    let g:elm_jump_to_error = 1
+    let g:elm_make_output_file = "index.html"
+    let g:elm_make_shw_warnings = 0
+    let g:elm_browser_command = ""
+    let g:elm_detailed_complete = 0
+
+    let g:elm_make_rootpath = "."
+    let g:elm_make_filepath_prefix = "./"
+    "set path+=./**5
+    set suffixesadd=.elm
+    au BufRead,BufNewFile *.elm set sw=2 ts=2 expandtab includeexpr=substitute(v:fname,'\\.','/','g')
+" }
+endif
+
+
+if isdirectory(expand("~/.vim/bundle/vimux/"))
 " vimux {
     let g:VimuxHeight = "30"
 
     " Run the current file with rspec
-    map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+    "map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
     " Prompt for a command to run
     map <Leader>vp :VimuxPromptCommand<CR>
@@ -118,16 +186,16 @@ if isdirectory(expand("~/.vim/bundle/vimux/"))
 endif
 
 if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
+    nnoremap <silent> <leader>gs :Git<CR>
+    nnoremap <silent> <leader>gd :Gdiffsplit<CR>
     nnoremap <silent> <leader>gdf :Git diff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
+    nnoremap <silent> <leader>gc :Git commit<CR>
+    nnoremap <silent> <leader>gb :Git_blame<CR>
+    nnoremap <silent> <leader>gl :Gclog<CR>
     nnoremap <silent> <leader>glg :Git lg<CR>
     nnoremap <silent> <leader>gp :Git pull<CR>
-    nnoremap <silent> <leader>gpu :Gpush<CR>
-    nnoremap <silent> <leader>gpun :Git push -u<CR>
+    nnoremap <silent> <leader>gpu :Git_push<CR>
+    nnoremap <silent> <leader>gpun :Git_push -u<CR>
     nnoremap <silent> <leader>gr :Gread<CR>
     nnoremap <silent> <leader>gw :Gwrite<CR>
     nnoremap <silent> <leader>ge :Gedit<CR>
@@ -206,46 +274,50 @@ if isdirectory(expand("~/.vim/bundle/vim-localvimrc/"))
     let g:localvimrc_persistent = 1
 endif
 
-if isdirectory(expand("~/.vim/bundle/Shougo/"))
-    " neocomplete like
-    set completeopt+=noinsert
-    " deoplete.nvim recommend
-    set completeopt+=noselect
-    " Run deoplete.nvim automatically
-    let g:deoplete#enable_at_startup = 1
-    if !exists('g:deoplete#omni#input_patterns')
-      let g:deoplete#omni#input_patterns = {}
-    endif
-    let g:deoplete#disable_auto_complete = 0
-    let g:deoplete#complete_method = 'complete'
-
-
-    "https://github.com/zchee/deoplete-go#available-settings
-    let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-    let g:deoplete#sources#go#package_dot = 1
-    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-    let g:deoplete#sources#go#pointer = 0
-
-    "https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
-	" Use smartcase.
-	let g:deoplete#enable_smart_case = 1
-    let g:deoplete#disable_auto_complete = 0
-
-    " deoplete
-    "imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-    "imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-    "imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
-
-	" <C-h>, <BS>: close popup and delete backword char.
-	"inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-	"inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-	" <CR>: close popup
-	inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-	function! s:my_cr_function() abort
-	  return deoplete#close_popup()
-	endfunction
-endif
+"if isdirectory(expand("~/.vim/bundle/Shougo/"))
+"    " neocomplete like
+"    set completeopt+=noinsert
+"    " deoplete.nvim recommend
+"    set completeopt+=noselect
+"
+"    " Run deoplete.nvim automatically
+"    let g:deoplete#enable_at_startup = 1
+"    if !exists('g:deoplete#omni#input_patterns')
+"      let g:deoplete#omni#input_patterns = {}
+"    endif
+"    let g:deoplete#disable_auto_complete = 0
+"    "let g:deoplete#complete_method = 'complete'
+"
+"
+"    "https://github.com/zchee/deoplete-go#available-settings
+"    let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+"    let g:deoplete#sources#go#package_dot = 1
+"    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+"    let g:deoplete#sources#go#pointer = 1
+"    let g:deoplete#sources#go#source_importer = 1
+"    let g:deoplete#sources#go#builtin_objects = 1
+"
+"    "https://gregjs.com/vim/2016/configuring-the-deoplete-asynchronous-keyword-completion-plugin-with-tern-for-vim/
+"	" Use smartcase.
+"	let g:deoplete#enable_smart_case = 1
+"
+"    let g:go_guru_scope = '...'
+"
+"    " deoplete
+"    imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+"    imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+"    imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
+"
+"	" <C-h>, <BS>: close popup and delete backword char.
+"    inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+"    inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+"
+"	" <CR>: close popup
+"	"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"	"function! s:my_cr_function() abort
+"	  "return deoplete#close_popup()
+"	"endfunction
+"endif
 
 " { http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
     set relativenumber
@@ -367,11 +439,15 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
     let g:syntastic_javascript_checkers = ['eslint']
 
-    let g:go_test_timeout = '10s'
+    let g:go_test_show_name = 1
+    let g:go_test_timeout = '30s'
     let g:go_auto_type_info = 1
     let g:go_auto_sameids = 0
     let g:go_updatetime = 1500
-    let g:go_info_mode = 'guru'
+
+    let g:go_def_mode='gopls'
+    let g:go_info_mode='gopls'
+    "let g:go_info_mode = 'guru'
     "let g:go_info_mode = 'gocode'
     let g:go_jump_to_error = 0
     let g:go_def_reuse_buffer = 1
@@ -382,6 +458,7 @@ if isdirectory(expand("~/.vim/bundle/vim-go"))
     let g:go_gocode_autobuild = 1
     let g:go_gocode_propose_builtins = 1
     let g:go_gocode_unimported_packages = 0
+    let g:go_bin_path = "/Users/k.sidenko/golang_project/bin/"
 
     " build_go_files is a custom function that builds or compiles the test file.
     " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
@@ -491,4 +568,137 @@ endif
 au BufRead /tmp/psql.edit.* set syntax=sql
 if isdirectory(expand("~/.vim/bundle/vim-jsx/"))
     let g:jsx_ext_required = 0
+endif
+
+
+"=====================================================
+" Python-mode settings
+"=====================================================
+" отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+
+" документация
+let g:pymode_doc = 0
+let g:pymode_doc_key = 'K'
+" проверка кода
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_ignore="E501,W601,C0110"
+" провека кода после сохранения
+let g:pymode_lint_write = 1
+
+" поддержка virtualenv
+let g:pymode_virtualenv = 1
+
+" установка breakpoints
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_key = '<leader>b'
+
+" подстветка синтаксиса
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" отключить autofold по коду
+let g:pymode_folding = 0
+
+" возможность запускать код
+let g:pymode_run = 0
+
+
+" Disable choose first function/method at autocomplete
+let g:jedi#popup_select_first = 0
+
+let python_highlight_all=1
+
+if isdirectory(expand("~/.vim/bundle/coc.nvim"))
+    " if hidden is not set, TextEdit might fail.
+    set hidden
+    " Better display for messages
+    set cmdheight=2
+    " Smaller updatetime for CursorHold & CursorHoldI
+    set updatetime=300
+    " don't give |ins-completion-menu| messages.
+    set shortmess+=c
+    " always show signcolumns
+    set signcolumn=yes
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Use <c-space> to trigger completion.
+    inoremap <silent><expr> <c-space> coc#refresh()
+
+    " Use `[c` and `]c` to navigate diagnostics
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    " Use U to show documentation in preview window
+    nnoremap <silent> U :call <SID>show_documentation()<CR>
+
+    " Do default action for previous item.
+    nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+    " Resume latest coc list
+    nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+endif
+
+if isdirectory(expand("~/.vim/bundle/vimux"))
+    let g:VimuxUseNearest = 1
+    let g:VimuxHeight = "40"
+    let g:VimuxOrientation = "v"
+    let g:VimuxPromptString = "Send command to console: "
+
+    " Run the current file with rspec
+    "map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+    " Prompt for a command to run
+    map <Leader>vp :VimuxPromptCommand<CR>
+    " Run last command executed by VimuxRunCommand
+    map <Leader>vl :VimuxRunLastCommand<CR>
+    " Inspect runner pane
+    map <Leader>vi :VimuxInspectRunner<CR>
+    " Close vim tmux runner opened by VimuxRunCommand
+    map <Leader>vq :VimuxCloseRunner<CR>
+    " Interrupt any command running in the runner pane
+    map <Leader>vx :VimuxInterruptRunner<CR>
+    " Zoom the runner pane (use <bind-key> z to restore runner pane)
+    map <Leader>vz :call VimuxZoomRunner()<CR>
+    " Clear the tmux history of the runner pane
+    map <Leader>vc :VimuxClearRunnerHistory<CR>
+endif
+
+if isdirectory(expand("~/.vim/bundle/vim-delve"))
+    let g:delve_use_vimux = 1
+endif
+
+if isdirectory(expand("~/.vim/bundle/vim-go"))
+    "let g:go_debug = ['debugger-commands']
+    let g:go_debug_windows = {
+            \ 'vars':       'leftabove 30vnew',
+            \ 'stack':      'botright 10new',
+            \ 'out':        'botright 5new',
+    \ }
+            "\ 'goroutines': 'rightbelow 100vnew',
+    "let g:go_debug_log_output = 'debugger,rpc'
+    let g:go_debug_log_output = ''
+    let g:go_highlight_debug = 1
+    let g:go_debug_breakpoint_sign_text = '>'
 endif
