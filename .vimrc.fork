@@ -14,7 +14,7 @@ set nocursorcolumn
 syntax sync minlines=256
 set re=1
 
-g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 1
 
 "https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -190,7 +190,7 @@ if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
     nnoremap <silent> <leader>gd :Gdiffsplit<CR>
     nnoremap <silent> <leader>gdf :Git diff<CR>
     nnoremap <silent> <leader>gc :Git commit<CR>
-    nnoremap <silent> <leader>gb :Git_blame<CR>
+    nnoremap <silent> <leader>gb :Git blame<CR>
     nnoremap <silent> <leader>gl :Gclog<CR>
     nnoremap <silent> <leader>glg :Git lg<CR>
     nnoremap <silent> <leader>gp :Git pull<CR>
