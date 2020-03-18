@@ -194,8 +194,8 @@ if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
     nnoremap <silent> <leader>gl :Gclog<CR>
     nnoremap <silent> <leader>glg :Git lg<CR>
     nnoremap <silent> <leader>gp :Git pull<CR>
-    nnoremap <silent> <leader>gpu :Git_push<CR>
-    nnoremap <silent> <leader>gpun :Git_push -u<CR>
+    nnoremap <silent> <leader>gpu :Git push<CR>
+    nnoremap <silent> <leader>gpun :Git push -u<CR>
     nnoremap <silent> <leader>gr :Gread<CR>
     nnoremap <silent> <leader>gw :Gwrite<CR>
     nnoremap <silent> <leader>ge :Gedit<CR>
