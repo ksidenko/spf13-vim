@@ -1,5 +1,5 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming',]
-let g:spf13_bundle_groups=['general', 'writing', 'programming',]
+let g:spf13_bundle_groups=['general', 'writing', ]
 UnBundle 'kristijanhusak/vim-multiple-cursors'
 UnBundle 'bling/vim-bufferline'
 UnBundle 'nathanaelkane/vim-indent-guides'
@@ -87,3 +87,9 @@ Plugin 'sebdah/vim-delve'
 Plugin 'morhetz/gruvbox'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'gosukiwi/vim-atom-dark'
+
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
+Plugin 'maksimr/vim-jsbeautify'
+
+Plugin 'posva/vim-vue'
