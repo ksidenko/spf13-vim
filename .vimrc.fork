@@ -49,6 +49,7 @@ let g:solarized_old_cursor_style=0
 "colorscheme atom-dark-256
 "colorscheme molokai
 
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
 
 set background=dark    " Setting dark mode
 "set background=light   " Setting light mode
@@ -819,3 +820,24 @@ autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 autocmd FileType md vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 "autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 
+if isdirectory(expand("~/.vim/bundle/ale"))
+    let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'javascript': ['prettier', 'eslint'],
+    \   'vue': ['prettier', 'eslint'],
+    \}
+    let g:ale_fix_on_save = 1
+    let g:ale_lint_on_insert_leave = 1
+    let g:ale_lint_on_save = 0
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_disable_lsp = 1
+    let g:ale_sign_column_always = 0
+
+    let g:ale_linters = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'javascript': ['prettier', 'eslint'],
+      \ 'typescript': ['prettier', 'eslint', 'tslint', 'tsserver'],
+      \ 'vue': ['prettier', 'eslint', 'vls']
+    \ }
+    let g:ale_linter_aliases = {'vue': ['css', 'javascript', 'typescript']}
+endif

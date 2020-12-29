@@ -1,5 +1,5 @@
 "let g:spf13_bundle_groups=['general', 'writing', 'neocomplete', 'programming',]
-let g:spf13_bundle_groups=['general', 'writing', ]
+let g:spf13_bundle_groups=['general', 'writing', 'programming']
 UnBundle 'kristijanhusak/vim-multiple-cursors'
 UnBundle 'bling/vim-bufferline'
 UnBundle 'nathanaelkane/vim-indent-guides'
@@ -55,7 +55,7 @@ Plugin 'ksidenko/fugitive-gitlab.vim'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plugin 'dkprice/vim-easygrep'
 " react js support
-"Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript' → in programming group
 "Plugin 'mxw/vim-jsx'
 
 "Plugin 'lambdatoast/elm.vim'
@@ -92,4 +92,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
 Plugin 'maksimr/vim-jsbeautify'
 
-Plugin 'posva/vim-vue'
+Plugin 'storyn26383/vim-vue'
+"Plugin  'tpope/vim-commentary' → in programming group
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'dense-analysis/ale'
